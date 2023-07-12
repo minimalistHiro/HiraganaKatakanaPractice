@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD904C612A580DFD00B56F77 /* HiraganaPracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */; };
+		FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C622A580DFD00B56F77 /* ContentView.swift */; };
+		FD904C652A580DFF00B56F77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD904C642A580DFF00B56F77 /* Assets.xcassets */; };
+		FD904C682A580DFF00B56F77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD904C672A580DFF00B56F77 /* Preview Assets.xcassets */; };
+		FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C702A580EE400B56F77 /* CanvasView.swift */; };
+		FD904C732A580F3E00B56F77 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C722A580F3E00B56F77 /* Data.swift */; };
+		FD904C762A580F5A00B56F77 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C752A580F5A00B56F77 /* Setting.swift */; };
+		FDC7B3E02A5947F300E581D0 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3DF2A5947F300E581D0 /* Line.swift */; };
+		FDC7B3EA2A595ACF00E581D0 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3E92A595ACE00E581D0 /* FontExtension.swift */; };
+		FDC7B3EE2A595DC300E581D0 /* HiraganaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3ED2A595DC300E581D0 /* HiraganaListView.swift */; };
+		FDC7B3F02A59652D00E581D0 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3EF2A59652D00E581D0 /* PracticeView.swift */; };
+		FDC7B3F22A5A877700E581D0 /* LevelSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3F12A5A877700E581D0 /* LevelSelectView.swift */; };
+		FDC7B3F42A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDC7B3F32A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf */; };
+		FDC7B3F62A5C20B600E581D0 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3F52A5C20B600E581D0 /* Arrow.swift */; };
+		FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3F72A5CFC4400E581D0 /* HiraganaArrowView.swift */; };
+		FDEF0A9E2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */; };
+		FDEF0AA02A5E4D6000BEBB29 /* CurveArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */; };
+		FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */; };
+		FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA32A5E6F9400BEBB29 /* DoubleTextPracticeView.swift */; };
+		FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FD904C5D2A580DFD00B56F77 /* HiraganaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiraganaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaPracticeApp.swift; sourceTree = "<group>"; };
+		FD904C622A580DFD00B56F77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FD904C642A580DFF00B56F77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD904C672A580DFF00B56F77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FD904C702A580EE400B56F77 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		FD904C722A580F3E00B56F77 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FD904C752A580F5A00B56F77 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		FDC7B3DF2A5947F300E581D0 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		FDC7B3E72A595A3C00E581D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FDC7B3E92A595ACE00E581D0 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		FDC7B3ED2A595DC300E581D0 /* HiraganaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaListView.swift; sourceTree = "<group>"; };
+		FDC7B3EF2A59652D00E581D0 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
+		FDC7B3F12A5A877700E581D0 /* LevelSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectView.swift; sourceTree = "<group>"; };
+		FDC7B3F32A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIZUDPMincho-Regular.ttf"; sourceTree = "<group>"; };
+		FDC7B3F52A5C20B600E581D0 /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
+		FDC7B3F72A5CFC4400E581D0 /* HiraganaArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaArrowView.swift; sourceTree = "<group>"; };
+		FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaSonantArrowView.swift; sourceTree = "<group>"; };
+		FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveArrow.swift; sourceTree = "<group>"; };
+		FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDiphthongArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AA32A5E6F9400BEBB29 /* DoubleTextPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextPracticeView.swift; sourceTree = "<group>"; };
+		FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDiphthongSonantArrowView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD904C5A2A580DFD00B56F77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD904C542A580DFD00B56F77 = {
+			isa = PBXGroup;
+			children = (
+				FD904C5F2A580DFD00B56F77 /* HiraganaPractice */,
+				FD904C5E2A580DFD00B56F77 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FD904C5E2A580DFD00B56F77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD904C5D2A580DFD00B56F77 /* HiraganaPractice.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD904C5F2A580DFD00B56F77 /* HiraganaPractice */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3E72A595A3C00E581D0 /* Info.plist */,
+				FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */,
+				FDC7B3E32A59576000E581D0 /* Util */,
+				FD904C6E2A580E1700B56F77 /* Views */,
+				FD904C742A580F4700B56F77 /* Data */,
+				FD904C642A580DFF00B56F77 /* Assets.xcassets */,
+				FD904C662A580DFF00B56F77 /* Preview Content */,
+			);
+			path = HiraganaPractice;
+			sourceTree = "<group>";
+		};
+		FD904C662A580DFF00B56F77 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FD904C672A580DFF00B56F77 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FD904C6E2A580E1700B56F77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD904C622A580DFD00B56F77 /* ContentView.swift */,
+				FD904C6F2A580E8B00B56F77 /* ChildViews */,
+				FDEF0A9C2A5D800B00BEBB29 /* Arrows */,
+				FDC7B3EB2A595BED00E581D0 /* Parts */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD904C6F2A580E8B00B56F77 /* ChildViews */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3F12A5A877700E581D0 /* LevelSelectView.swift */,
+				FDC7B3ED2A595DC300E581D0 /* HiraganaListView.swift */,
+				FDC7B3EF2A59652D00E581D0 /* PracticeView.swift */,
+				FDEF0AA32A5E6F9400BEBB29 /* DoubleTextPracticeView.swift */,
+				FD904C702A580EE400B56F77 /* CanvasView.swift */,
+			);
+			path = ChildViews;
+			sourceTree = "<group>";
+		};
+		FD904C742A580F4700B56F77 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FD904C722A580F3E00B56F77 /* Data.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FDC7B3E32A59576000E581D0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				FD904C752A580F5A00B56F77 /* Setting.swift */,
+				FDC7B3E82A595ABC00E581D0 /* Extention */,
+				FDC7B3E42A59576900E581D0 /* Fonts */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		FDC7B3E42A59576900E581D0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3F32A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FDC7B3E82A595ABC00E581D0 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3E92A595ACE00E581D0 /* FontExtension.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		FDC7B3EB2A595BED00E581D0 /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3DF2A5947F300E581D0 /* Line.swift */,
+				FDC7B3F52A5C20B600E581D0 /* Arrow.swift */,
+				FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */,
+			);
+			path = Parts;
+			sourceTree = "<group>";
+		};
+		FDEF0A9C2A5D800B00BEBB29 /* Arrows */ = {
+			isa = PBXGroup;
+			children = (
+				FDC7B3F72A5CFC4400E581D0 /* HiraganaArrowView.swift */,
+				FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */,
+				FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */,
+				FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */,
+			);
+			path = Arrows;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FD904C5C2A580DFD00B56F77 /* HiraganaPractice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD904C6B2A580DFF00B56F77 /* Build configuration list for PBXNativeTarget "HiraganaPractice" */;
+			buildPhases = (
+				FD904C592A580DFD00B56F77 /* Sources */,
+				FD904C5A2A580DFD00B56F77 /* Frameworks */,
+				FD904C5B2A580DFD00B56F77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HiraganaPractice;
+			productName = HiraganaPractice;
+			productReference = FD904C5D2A580DFD00B56F77 /* HiraganaPractice.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FD904C552A580DFD00B56F77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					FD904C5C2A580DFD00B56F77 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = FD904C582A580DFD00B56F77 /* Build configuration list for PBXProject "HiraganaPractice" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FD904C542A580DFD00B56F77;
+			productRefGroup = FD904C5E2A580DFD00B56F77 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD904C5C2A580DFD00B56F77 /* HiraganaPractice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FD904C5B2A580DFD00B56F77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD904C682A580DFF00B56F77 /* Preview Assets.xcassets in Resources */,
+				FDC7B3F42A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf in Resources */,
+				FD904C652A580DFF00B56F77 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD904C592A580DFD00B56F77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */,
+				FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */,
+				FD904C762A580F5A00B56F77 /* Setting.swift in Sources */,
+				FDC7B3EA2A595ACF00E581D0 /* FontExtension.swift in Sources */,
+				FDEF0AA02A5E4D6000BEBB29 /* CurveArrow.swift in Sources */,
+				FDEF0A9E2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift in Sources */,
+				FDC7B3EE2A595DC300E581D0 /* HiraganaListView.swift in Sources */,
+				FD904C612A580DFD00B56F77 /* HiraganaPracticeApp.swift in Sources */,
+				FDC7B3F22A5A877700E581D0 /* LevelSelectView.swift in Sources */,
+				FDC7B3F62A5C20B600E581D0 /* Arrow.swift in Sources */,
+				FDC7B3E02A5947F300E581D0 /* Line.swift in Sources */,
+				FD904C732A580F3E00B56F77 /* Data.swift in Sources */,
+				FDC7B3F02A59652D00E581D0 /* PracticeView.swift in Sources */,
+				FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */,
+				FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */,
+				FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */,
+				FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FD904C692A580DFF00B56F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FD904C6A2A580DFF00B56F77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FD904C6C2A580DFF00B56F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HiraganaPractice/Preview Content\"";
+				DEVELOPMENT_TEAM = T9U9A227FB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HiraganaPractice/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ひらがな";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.HiraganaPractice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FD904C6D2A580DFF00B56F77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HiraganaPractice/Preview Content\"";
+				DEVELOPMENT_TEAM = T9U9A227FB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HiraganaPractice/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ひらがな";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.HiraganaPractice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FD904C582A580DFD00B56F77 /* Build configuration list for PBXProject "HiraganaPractice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD904C692A580DFF00B56F77 /* Debug */,
+				FD904C6A2A580DFF00B56F77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD904C6B2A580DFF00B56F77 /* Build configuration list for PBXNativeTarget "HiraganaPractice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD904C6C2A580DFF00B56F77 /* Debug */,
+				FD904C6D2A580DFF00B56F77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FD904C552A580DFD00B56F77 /* Project object */;
+}

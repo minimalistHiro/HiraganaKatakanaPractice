@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct Arrow: View {
-    var setting = Setting()
+    let setting = Setting()
     let x: Double
     let y: Double
     let degree: Double
     let number: Int
     let buttonPosition: ButtonPosition
+    
+    var magnification: Double {
+        return CanvasView.canvasGetSize / setting.canvasMaxSize
+    }               // 倍率
     
     enum ButtonPosition {
         case top
@@ -27,32 +31,35 @@ struct Arrow: View {
         switch buttonPosition {
         case .top:
             Text("\(number)")
-                .position(x: x, y: y - 15)
+                .position(x: magnification * x, y: magnification * (y - 15))
                 .foregroundColor(number == 1 ? .red : .black)
         case .right:
             Text("\(number)")
-                .position(x: x + 15, y: y + 5)
+                .position(x: magnification * (x + 15), y: magnification * (y + 5))
                 .foregroundColor(number == 1 ? .red : .black)
         case .left:
             Text("\(number)")
-                .position(x: x - 15, y: y + 5)
+                .position(x: magnification * (x - 15), y: magnification * (y + 5))
                 .foregroundColor(number == 1 ? .red : .black)
         case .bottom:
             Text("\(number)")
-                .position(x: x, y: y + 20)
+                .position(x: magnification * x, y: magnification * (y + 20))
                 .foregroundColor(number == 1 ? .red : .black)
         }
         
         Path { path in
-            path.move(to: CGPoint(x: x, y: y))
-            path.addLine(to: CGPoint(x: x + 20, y: y))
-            path.addLine(to: CGPoint(x: x + 15, y: y - 5))
-            path.move(to: CGPoint(x: x + 20, y: y))
-            path.addLine(to: CGPoint(x: x + 15, y: y + 5))
+            path.move(to: CGPoint(x: magnification * x, y: magnification * y))
+            path.addLine(to: CGPoint(x: magnification * (x + 20), y: magnification * y))
+            path.addLine(to: CGPoint(x: magnification * (x + 15), y: magnification * (y - 5)))
+            path.move(to: CGPoint(x: magnification * (x + 20), y: magnification * y))
+            path.addLine(to: CGPoint(x: magnification * (x + 15), y: magnification * (y + 5)))
         }
         .stroke(lineWidth: 2)
-        .rotationEffect(Angle(degrees: degree), anchor: UnitPoint(x: (0.5 * x) / (setting.canvasSize / 2), y: (0.5 * y) / (setting.canvasSize / 2)))
+        .rotationEffect(Angle(degrees: degree), anchor: UnitPoint(x: (0.5 * magnification * x) / (CanvasView.canvasGetSize / 2), y: (0.5 * magnification * y) / (CanvasView.canvasGetSize / 2)))
         .foregroundColor(number == 1 ? .red : .black)
+//        .onAppear {
+//            print("Arrow\(CanvasView.canvasGetSize)")
+//        }
     }
 }
 

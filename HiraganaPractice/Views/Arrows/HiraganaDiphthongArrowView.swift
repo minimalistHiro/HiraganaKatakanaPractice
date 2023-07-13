@@ -13,29 +13,29 @@ struct HiraganaDiphthongArrowView: View {
     var body: some View {
         switch hiragana {
         case "ぁ":
-            Arrow(x: 160, y: 50, degree: 20, number: 1, buttonPosition: .top)
-            Arrow(x: 210, y: 15, degree: 90, number: 2, buttonPosition: .right)
-            Arrow(x: 255, y: 60, degree: 140, number: 3, buttonPosition: .right)
+            Arrow(x: 20, y: 185, degree: 20, number: 1, buttonPosition: .top)
+            Arrow(x: 70, y: 145, degree: 90, number: 2, buttonPosition: .right)
+            Arrow(x: 115, y: 190, degree: 140, number: 3, buttonPosition: .right)
         case "ぃ":
-            Arrow(x: 165, y: 30, degree: 70, number: 1, buttonPosition: .top)
-            Arrow(x: 220, y: 40, degree: 50, number: 2, buttonPosition: .top)
+            Arrow(x: 25, y: 160, degree: 70, number: 1, buttonPosition: .top)
+            Arrow(x: 80, y: 170, degree: 50, number: 2, buttonPosition: .top)
         case "ぇ":
-            Arrow(x: 180, y: 35, degree: 20, number: 1, buttonPosition: .top)
-            Arrow(x: 160, y: 85, degree: -20, number: 2, buttonPosition: .top)
+            Arrow(x: 30, y: 165, degree: 20, number: 1, buttonPosition: .top)
+            Arrow(x: 15, y: 220, degree: -20, number: 2, buttonPosition: .top)
         case "ぉ":
-            Arrow(x: 150, y: 65, degree: 10, number: 1, buttonPosition: .top)
-            Arrow(x: 200, y: 20, degree: 90, number: 2, buttonPosition: .left)
-            Arrow(x: 220, y: 40, degree: 30, number: 3, buttonPosition: .top)
+            Arrow(x: 5, y: 195, degree: 10, number: 1, buttonPosition: .top)
+            Arrow(x: 50, y: 150, degree: 90, number: 2, buttonPosition: .left)
+            Arrow(x: 80, y: 170, degree: 30, number: 3, buttonPosition: .top)
         case "ゃ":
-            Arrow(x: 145, y: 100, degree: -20, number: 1, buttonPosition: .top)
-            Arrow(x: 210, y: 30, degree: 30, number: 2, buttonPosition: .top)
-            Arrow(x: 180, y: 20, degree: 60, number: 3, buttonPosition: .left)
+            Arrow(x: 10, y: 235, degree: -20, number: 1, buttonPosition: .top)
+            Arrow(x: 60, y: 160, degree: 30, number: 2, buttonPosition: .top)
+            Arrow(x: 30, y: 160, degree: 60, number: 3, buttonPosition: .left)
         case "ゅ":
-            Arrow(x: 180, y: 25, degree: 90, number: 1, buttonPosition: .right)
-            Arrow(x: 220, y: 10, degree: 80, number: 2, buttonPosition: .right)
+            Arrow(x: 40, y: 160, degree: 90, number: 1, buttonPosition: .right)
+            Arrow(x: 75, y: 150, degree: 80, number: 2, buttonPosition: .right)
         case "ょ":
-            Arrow(x: 200, y: 70, degree: 0, number: 1, buttonPosition: .top)
-            Arrow(x: 230, y: 15, degree: 90, number: 2, buttonPosition: .right)
+            Arrow(x: 30, y: 210, degree: 0, number: 1, buttonPosition: .top)
+            Arrow(x: 70, y: 145, degree: 90, number: 2, buttonPosition: .right)
         case "き":
             Arrow(x: 30, y: 70, degree: 30, number: 1, buttonPosition: .top)
             Arrow(x: 30, y: 110, degree: 30, number: 2, buttonPosition: .top)

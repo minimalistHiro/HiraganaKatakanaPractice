@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct LevelSelectView: View {
+    let setting = Setting()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
-    let titleTextSize: CGFloat = 40
+    let titleTextSize: CGFloat = 45
     let levelTextSize: CGFloat = 30
     
     var body: some View {
@@ -23,7 +24,7 @@ struct LevelSelectView: View {
                 
                 Group {
                     Text("ひらがな")
-                        .font(.system(size: titleTextSize))
+                        .font(.mincho(ofSize: titleTextSize))
                     Spacer()
                 }
                 
@@ -33,7 +34,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(1)
                     } label: {
-                        Text("Level 1")
+                        LevelButtonView(level: 1, backgroundColor: setting.hiraganaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -45,7 +46,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(2)
                     } label: {
-                        Text("Level 2")
+                        LevelButtonView(level: 2, backgroundColor: setting.hiraganaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -57,7 +58,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(3)
                     } label: {
-                        Text("Level 3")
+                        LevelButtonView(level: 3, backgroundColor: setting.hiraganaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -69,7 +70,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(4)
                     } label: {
-                        Text("Level 4")
+                        LevelButtonView(level: 4, backgroundColor: setting.hiraganaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -84,7 +85,7 @@ struct LevelSelectView: View {
                 
                 Group {
                     Text("カタカナ")
-                        .font(.system(size: titleTextSize))
+                        .font(.mincho(ofSize: titleTextSize))
                     Spacer()
                 }
                 
@@ -94,7 +95,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(5)
                     } label: {
-                        Text("Level 1")
+                        LevelButtonView(level: 1, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -106,7 +107,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(6)
                     } label: {
-                        Text("Level 2")
+                        LevelButtonView(level: 2, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -118,7 +119,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(7)
                     } label: {
-                        Text("Level 3")
+                        LevelButtonView(level: 3, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -130,7 +131,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(8)
                     } label: {
-                        Text("Level 4")
+                        LevelButtonView(level: 4, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()

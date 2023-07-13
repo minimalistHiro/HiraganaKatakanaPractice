@@ -27,6 +27,12 @@
 		FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */; };
 		FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA32A5E6F9400BEBB29 /* DoubleTextPracticeView.swift */; };
 		FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */; };
+		FDEF0AA82A5E880300BEBB29 /* KatakanaArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA72A5E880300BEBB29 /* KatakanaArrowView.swift */; };
+		FDEF0AAA2A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA92A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift */; };
+		FDEF0AAC2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AAB2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift */; };
+		FDEF0AAE2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AAD2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift */; };
+		FDEF0AB12A5EF0B600BEBB29 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */; };
+		FDEF0AB32A6018B300BEBB29 /* LevelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +58,12 @@
 		FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDiphthongArrowView.swift; sourceTree = "<group>"; };
 		FDEF0AA32A5E6F9400BEBB29 /* DoubleTextPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTextPracticeView.swift; sourceTree = "<group>"; };
 		FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDiphthongSonantArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AA72A5E880300BEBB29 /* KatakanaArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AA92A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaSonantArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AAB2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaDiphthongArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AAD2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaDiphthongSonantArrowView.swift; sourceTree = "<group>"; };
+		FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
+		FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +151,7 @@
 			children = (
 				FD904C752A580F5A00B56F77 /* Setting.swift */,
 				FDC7B3E82A595ABC00E581D0 /* Extention */,
+				FDEF0AAF2A5EF09C00BEBB29 /* Sounds */,
 				FDC7B3E42A59576900E581D0 /* Fonts */,
 			);
 			path = Util;
@@ -166,6 +179,7 @@
 				FDC7B3DF2A5947F300E581D0 /* Line.swift */,
 				FDC7B3F52A5C20B600E581D0 /* Arrow.swift */,
 				FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */,
+				FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -177,8 +191,20 @@
 				FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */,
 				FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */,
 				FDEF0AA52A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift */,
+				FDEF0AA72A5E880300BEBB29 /* KatakanaArrowView.swift */,
+				FDEF0AA92A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift */,
+				FDEF0AAB2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift */,
+				FDEF0AAD2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift */,
 			);
 			path = Arrows;
+			sourceTree = "<group>";
+		};
+		FDEF0AAF2A5EF09C00BEBB29 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */,
+				FDEF0AB12A5EF0B600BEBB29 /* Pronunciation.swift in Sources */,
 				FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */,
+				FDEF0AAE2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift in Sources */,
 				FD904C762A580F5A00B56F77 /* Setting.swift in Sources */,
 				FDC7B3EA2A595ACF00E581D0 /* FontExtension.swift in Sources */,
 				FDEF0AA02A5E4D6000BEBB29 /* CurveArrow.swift in Sources */,
@@ -264,8 +292,12 @@
 				FDC7B3F62A5C20B600E581D0 /* Arrow.swift in Sources */,
 				FDC7B3E02A5947F300E581D0 /* Line.swift in Sources */,
 				FD904C732A580F3E00B56F77 /* Data.swift in Sources */,
+				FDEF0AAC2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift in Sources */,
+				FDEF0AA82A5E880300BEBB29 /* KatakanaArrowView.swift in Sources */,
+				FDEF0AAA2A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift in Sources */,
 				FDC7B3F02A59652D00E581D0 /* PracticeView.swift in Sources */,
 				FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */,
+				FDEF0AB32A6018B300BEBB29 /* LevelButtonView.swift in Sources */,
 				FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */,
 				FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */,
 				FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */,

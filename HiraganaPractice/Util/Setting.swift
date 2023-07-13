@@ -10,12 +10,20 @@ import SwiftUI
 // 各種設定
 final class Setting {
     // Viewのサイズ
-    let canvasSize: CGFloat = 300                           // Canvasのサイズ
+    let canvasMaxSize: CGFloat = 300                        // Canvasの最大サイズ
+    let canvasMinSize: CGFloat = 150                        // Canvasの最小サイズ
     let canvasBorderWidth: CGFloat = 2                      // Canvasのフレーム太さ
     let canvasButtonSize: CGFloat = 35                      // Canvasボタンサイズ
+    let textShowButtonSize: CGFloat = 25                    // テキストの表示有無のボタンサイズ
     
     // ユーザーインターフェース
     let lineWidth: CGFloat = 15                             // 線の太さ
+    
+    // カラー
+    // 背景色
+    let topViewBackgroundColor: Color = Color("TopViewBackgroundColor")     // トップ画面
+    let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")   // ひらがな
+    let katakanaBackgroundColor: Color = Color("KatakanaBackgroundColor")   // カタカナ
     
     // ひらがな50音
     let hiraganaList: [String] = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]
@@ -35,5 +43,18 @@ final class Setting {
     
     // カタカナ50音
     let katakanaList: [String] = ["ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン"]
+    let katakanaReverseList: [String] = ["ワ", "", "ヲ", "", "ン", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "", "ユ", "", "ヨ", "マ", "ミ", "ム", "メ", "モ", "ハ", "ヒ", "フ", "ヘ", "ホ", "ナ", "ニ", "ヌ", "ネ", "ノ", "タ", "チ", "ツ", "テ", "ト", "サ", "シ", "ス", "セ", "ソ", "カ", "キ", "ク", "ケ", "コ", "ア", "イ", "ウ", "エ", "オ"]
+    
+    // カタカナ濁音
+    let katakanaSonantList: [String] = ["ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ", "ダ", "ヂ", "ヅ", "デ", "ド", "バ", "ビ", "ブ", "ベ", "ボ", "パ", "ピ", "プ", "ペ", "ポ"]
+    let katakanaSonantReverseList: [String] = ["パ", "ピ", "プ", "ペ", "ポ", "バ", "ビ", "ブ", "ベ", "ボ", "ダ", "ヂ", "ヅ", "デ", "ド", "ザ", "ジ", "ズ", "ゼ", "ゾ", "ガ", "ギ", "グ", "ゲ", "ゴ"]
+    
+    // カタカナ拗音
+    let katakanaDiphthongList: [String] = ["キャ", "キュ", "キョ", "シャ", "シュ", "ショ", "チャ", "チュ", "チョ", "ニャ", "ニュ", "ニョ", "ヒャ", "ヒュ", "ヒョ", "ファ", "フィ", "フェ", "フォ", "ミャ", "ミュ", "ミョ", "リャ", "リュ", "リョ"]
+    let katakanaDiphthongReverseList: [String] = ["リャ", "", "リュ", "", "リョ", "ミャ", "", "ミュ", "", "ミョ", "ファ", "フィ", "", "フェ", "フォ", "ヒャ", "", "ヒュ", "", "ヒョ",  "ニャ", "", "ニュ", "", "ニョ", "チャ", "", "チュ", "", "チョ", "シャ", "", "シュ", "", "ショ", "キャ", "", "キュ", "", "キョ"]
+    
+    // カタカナ拗音濁音
+    let katakanaDiphthongSonantList: [String] = ["ギャ", "ギュ", "ギョ", "ジャ", "ジュ", "ジョ", "ヂャ", "ヂュ", "ヂョ", "ビャ", "ビュ", "ビョ", "ピャ", "ピュ", "ピョ"]
+    let katakanaDiphthongSonantReverseList: [String] = ["ピャ", "", "ピュ", "", "ピョ", "ビャ", "", "ビュ", "", "ビョ", "ヂャ", "", "ヂュ", "", "ヂョ", "ジャ", "", "ジュ", "", "ジョ", "ギャ", "", "ギュ", "", "ギョ"]
 }
 

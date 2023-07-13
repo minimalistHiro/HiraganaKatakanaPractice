@@ -13,15 +13,15 @@ struct HiraganaDiphthongSonantArrowView: View {
     var body: some View {
         switch hiragana {
         case "ゃ":
-            Arrow(x: 145, y: 100, degree: -20, number: 1, buttonPosition: .top)
-            Arrow(x: 210, y: 30, degree: 30, number: 2, buttonPosition: .top)
-            Arrow(x: 180, y: 20, degree: 60, number: 3, buttonPosition: .left)
+            Arrow(x: 10, y: 235, degree: -20, number: 1, buttonPosition: .top)
+            Arrow(x: 60, y: 160, degree: 30, number: 2, buttonPosition: .top)
+            Arrow(x: 30, y: 160, degree: 60, number: 3, buttonPosition: .left)
         case "ゅ":
-            Arrow(x: 180, y: 25, degree: 90, number: 1, buttonPosition: .right)
-            Arrow(x: 220, y: 10, degree: 80, number: 2, buttonPosition: .right)
+            Arrow(x: 40, y: 160, degree: 90, number: 1, buttonPosition: .right)
+            Arrow(x: 75, y: 150, degree: 80, number: 2, buttonPosition: .right)
         case "ょ":
-            Arrow(x: 200, y: 70, degree: 0, number: 1, buttonPosition: .top)
-            Arrow(x: 230, y: 15, degree: 90, number: 2, buttonPosition: .right)
+            Arrow(x: 30, y: 210, degree: 0, number: 1, buttonPosition: .top)
+            Arrow(x: 70, y: 145, degree: 90, number: 2, buttonPosition: .right)
         case "ぎ":
             Arrow(x: 30, y: 70, degree: 30, number: 1, buttonPosition: .top)
             Arrow(x: 30, y: 110, degree: 30, number: 2, buttonPosition: .top)

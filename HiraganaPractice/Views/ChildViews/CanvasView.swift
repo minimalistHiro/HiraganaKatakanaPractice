@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct CanvasView: View {
-    var setting = Setting()
+    let setting = Setting()
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
     @Binding var endedDrawPoints: [DrawPoints]
+    @Binding var isShowArrow: Bool
+    @Binding var isShowText: Bool
     // onChangedイベント中の座標を保持
     @State private var tmpDrawPoints: DrawPoints = DrawPoints(points: [])
     @State private var canvasLocalRect: CGRect = .zero              // canvasのサイズ情報
-    let text: String
+    static var canvasGetSize: CGFloat = .zero                       // canvasの取得サイズ
+    @State private var isGetCanvasSize: Bool = false                // canvasサイズを取得したか否か
+    let text: String                                                // 取得したテキスト1文字
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,35 +54,63 @@ struct CanvasView: View {
                     .frame(width: 0.5)
                 
                 // 表示文字。小さいひらがなの場合、文字を小さくする。そのほかの平仮名はそのまま表示。
-                if text.contains("ゃ") || text.contains("ゅ") || text.contains("ょ") || text.contains("ぁ") || text.contains("ぃ") || text.contains("ぇ") || text.contains("ぉ") {
-                    VStack {
-                        HStack {
+                if isShowText {
+                    if text.contains("ゃ") || text.contains("ゅ") || text.contains("ょ") || text.contains("ぁ") || text.contains("ぃ") || text.contains("ぇ") || text.contains("ぉ") || text.contains("ャ") || text.contains("ュ") || text.contains("ョ") || text.contains("ァ") || text.contains("ィ") || text.contains("ェ") || text.contains("ォ") {
+                        VStack {
                             Spacer()
-                            Text(text)
-                                .font(.mincho(ofSize: 150))
-                                .opacity(0.1)
-                                .padding(.horizontal)
+                            HStack {
+                                Text(text)
+                                    .font(.mincho(ofSize: resizeTextSize(150)))
+                                    .opacity(0.1)
+                                    .padding()
+                                Spacer()
+                            }
                         }
-                        Spacer()
+                    } else {
+                        Text(text)
+                            .font(.mincho(ofSize: resizeTextSize(250)))
+                            .opacity(0.1)
                     }
-                } else {
-                    Text(text)
-                        .font(.mincho(ofSize: 250))
-                        .opacity(0.1)
                 }
                 
-                // 矢印
-                switch selectedLevel {
-                case 1:
-                    HiraganaArrowView(hiragana: text)
-                case 2:
-                    HiraganaSonantArrowView(hiragana: text)
-                case 3:
-                    HiraganaDiphthongArrowView(hiragana: text)
-                case 4:
-                    HiraganaDiphthongSonantArrowView(hiragana: text)
-                default:
-                    HiraganaArrowView(hiragana: text)
+                // CanvasViewのサイズ取得後に、各矢印を表示。
+                if isGetCanvasSize {
+                    // 矢印表示ボタンが有効の場合のみ表示。
+                    if isShowArrow {
+                        // 矢印
+                        switch selectedLevel {
+                        case 1:
+                            HiraganaArrowView(hiragana: text)
+                        case 2:
+                            HiraganaSonantArrowView(hiragana: text)
+                        case 3:
+                            HiraganaDiphthongArrowView(hiragana: text)
+                        case 4:
+                            HiraganaDiphthongSonantArrowView(hiragana: text)
+                        case 5:
+                            KatakanaArrowView(katakana: text)
+                        case 6:
+                            KatakanaSonantArrowView(katakana: text)
+                        case 7:
+                            KatakanaDiphthongArrowView(katakana: text)
+                        case 8:
+                            KatakanaDiphthongSonantArrowView(katakana: text)
+                        default:
+                            HiraganaArrowView(hiragana: text)
+                        }
+                    }
+                }
+            }
+            .background() {
+                // backgroundを用いて動的にCanvasViewのサイズ（横幅長さ）を取得。
+                GeometryReader { geometry in
+                    Path { path in
+                        // エラー阻止のため、遅延処理で実行。
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            CanvasView.canvasGetSize = geometry.frame(in: .local).maxX
+                            isGetCanvasSize = true
+                        }
+                    }
                 }
             }
             .gesture(
@@ -125,10 +157,18 @@ struct CanvasView: View {
         let maxY = canvasLocalRect.maxY - (setting.lineWidth / 2) + setting.canvasBorderWidth
         return (point.x >= minX && point.x <= maxX) && (point.y >= minY && point.y <= maxY)
     }
+    
+    /// 表示するテキストのサイズを端末サイズに合わせて変更する。
+    /// - Parameters:
+    ///   - textSize: 標準テキストサイズ
+    /// - Returns: リサイズ後のテキストサイズ
+    private func resizeTextSize(_ textSize: CGFloat) -> CGFloat {
+        return textSize * (CanvasView.canvasGetSize / setting.canvasMaxSize)
+    }
 }
 
 struct CanvasView_Previews: PreviewProvider {
     static var previews: some View {
-        CanvasView(selectedLevel: .constant(1), isDoubleText: .constant(false), endedDrawPoints: .constant([]), text: "あ")
+        CanvasView(selectedLevel: .constant(1), isDoubleText: .constant(false), endedDrawPoints: .constant([]), isShowArrow: .constant(true), isShowText: .constant(true), text: "あ")
     }
 }

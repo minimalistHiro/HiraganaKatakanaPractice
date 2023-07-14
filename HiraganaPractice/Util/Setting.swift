@@ -21,9 +21,10 @@ final class Setting {
     
     // カラー
     // 背景色
-    let topViewBackgroundColor: Color = Color("TopViewBackgroundColor")     // トップ画面
-    let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")   // ひらがな
-    let katakanaBackgroundColor: Color = Color("KatakanaBackgroundColor")   // カタカナ
+    let topViewBackgroundColor: Color = Color("TopViewBackgroundColor")         // トップ画面
+    let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")       // ひらがな
+    let katakanaBackgroundColor: Color = Color("KatakanaBackgroundColor")       // カタカナ
+    let clearedTextBackgroundColor: Color = Color("ClearedTextBackgroundColor") // クリア後のテキスト
     
     // ひらがな50音
     let hiraganaList: [String] = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]

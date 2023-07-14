@@ -141,6 +141,20 @@ struct LevelSelectView: View {
             
             Spacer()
         }
+        .background(setting.topViewBackgroundColor)
+        //            .toolbar {
+        //                ToolbarItem(placement: .navigationBarTrailing) {
+        //                    Button {
+        //                        navigationPath.append(TappedButtons.tappedSetting)
+        //                    } label: {
+        //                        Image(systemName: "gear")
+        //                            .resizable()
+        //                            .scaledToFit()
+        //                            .frame(width: 30)
+        //                            .foregroundColor(.black)
+        //                    }
+        //                }
+        //            }
     }
 }
 

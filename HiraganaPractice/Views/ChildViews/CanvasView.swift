@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CanvasView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [])
+    var data: FetchedResults<Entity>
+    
     let setting = Setting()
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
@@ -20,6 +24,7 @@ struct CanvasView: View {
     static var canvasGetSize: CGFloat = .zero                       // canvasの取得サイズ
     @State private var isGetCanvasSize: Bool = false                // canvasサイズを取得したか否か
     let text: String                                                // 取得したテキスト1文字
+//    let savedText: String                                           // セーブ用テキスト
     
     var body: some View {
         GeometryReader { geometry in
@@ -131,6 +136,7 @@ struct CanvasView: View {
                     .onEnded({ value in
                         endedDrawPoints.append(tmpDrawPoints)
                         tmpDrawPoints = DrawPoints(points: [])
+//                        addClearedText()
                     })
             )
         }
@@ -165,6 +171,20 @@ struct CanvasView: View {
     private func resizeTextSize(_ textSize: CGFloat) -> CGFloat {
         return textSize * (CanvasView.canvasGetSize / setting.canvasMaxSize)
     }
+    
+    /// Modelにクリアしたテキストを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+//    private func addClearedText() {
+//        let newText = Entity(context: viewContext)
+//        newText.clearedText = savedText
+//
+//        do {
+//            try viewContext.save()
+//        } catch {
+//            fatalError("セーブに失敗")
+//        }
+//    }
 }
 
 struct CanvasView_Previews: PreviewProvider {

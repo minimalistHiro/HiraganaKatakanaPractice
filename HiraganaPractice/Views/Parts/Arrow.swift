@@ -57,9 +57,6 @@ struct Arrow: View {
         .stroke(lineWidth: 2)
         .rotationEffect(Angle(degrees: degree), anchor: UnitPoint(x: (0.5 * magnification * x) / (CanvasView.canvasGetSize / 2), y: (0.5 * magnification * y) / (CanvasView.canvasGetSize / 2)))
         .foregroundColor(number == 1 ? .red : .black)
-//        .onAppear {
-//            print("Arrow\(CanvasView.canvasGetSize)")
-//        }
     }
 }
 

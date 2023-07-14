@@ -9,6 +9,10 @@ import SwiftUI
 import AVFoundation
 
 struct PracticeView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [])
+    var data: FetchedResults<Entity>
+    
     let setting = Setting()
     let pronunciation = Pronunciation()
     @Binding var navigationPath: NavigationPath
@@ -16,7 +20,7 @@ struct PracticeView: View {
     @Binding var isDoubleText: Bool
     @State private var endedDrawPoints: [DrawPoints] = []       // ペンで描いた座標を格納
     @State private var isShowArrow: Bool = true                 // 書き順矢印の表示有無
-    @State private var isShowText: Bool = true                 // テキストの表示有無
+    @State private var isShowText: Bool = true                  // テキストの表示有無
     let text: String                                            // 取得したテキスト1文字
     var list: [String] {
         switch selectedLevel {
@@ -34,7 +38,16 @@ struct PracticeView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        ZStack {
+            // 背景色。ひらがなモードとカタカナモードで色を分ける。
+            if selectedLevel <= 4 {
+                setting.hiraganaBackgroundColor
+                    .ignoresSafeArea()
+            } else {
+                setting.katakanaBackgroundColor
+                    .ignoresSafeArea()
+            }
+            
             HStack {
                 Spacer()
                 
@@ -129,8 +142,10 @@ struct PracticeView: View {
                 
                 // キャンバス
                 CanvasView(selectedLevel: $selectedLevel, isDoubleText: $isDoubleText, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, text: text)
-    //                .frame(width: setting.canvasMaxSize, height: setting.canvasMaxSize)
-                    .frame(minWidth: setting.canvasMinSize, maxWidth: setting.canvasMaxSize, minHeight: setting.canvasMinSize, maxHeight: setting.canvasMaxSize)
+                    .frame(minWidth: setting.canvasMinSize,
+                           maxWidth: setting.canvasMaxSize,
+                           minHeight: setting.canvasMinSize,
+                           maxHeight: setting.canvasMaxSize)
                 
                 Spacer()
                 
@@ -156,6 +171,26 @@ struct PracticeView: View {
                 
                 Spacer()
             }
+        }
+        .onChange(of: endedDrawPoints) { points in
+            if points.count == 1 {
+                print("created")
+                addClearedText()
+            }
+        }
+    }
+    
+    /// Modelにクリアしたテキストを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func addClearedText() {
+        let newText = Entity(context: viewContext)
+        newText.clearedText = text
+        
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
         }
     }
 }

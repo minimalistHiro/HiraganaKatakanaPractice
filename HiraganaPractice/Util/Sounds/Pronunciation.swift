@@ -15,8 +15,6 @@ class Pronunciation: NSObject {
     func playSound() {
         do {
             player = try AVAudioPlayer(data: NSDataAsset(name: "\(fileName)")!.data)
-//            player.stop()
-//            player.currentTime = 0.0
             player.play()
         } catch {
             print("音の再生に失敗しました。")

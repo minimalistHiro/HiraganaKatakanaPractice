@@ -14,10 +14,11 @@ struct PracticeView: View {
     var data: FetchedResults<Entity>
     
     let setting = Setting()
-    let pronunciation = Pronunciation()
+    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
-    @Binding var isDoubleText: Bool
+    @Binding var nextText: String
+    @Binding var isVibration: Bool
     @State private var endedDrawPoints: [DrawPoints] = []       // ペンで描いた座標を格納
     @State private var isShowArrow: Bool = true                 // 書き順矢印の表示有無
     @State private var isShowText: Bool = true                  // テキストの表示有無
@@ -53,16 +54,21 @@ struct PracticeView: View {
                 
                 // 一つ前のひらがなへ
                 Button {
+                    if isVibration {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    }
                     endedDrawPoints.removeAll()
                     if let index = list.firstIndex(of: text) {
                         navigationPath.removeLast()
                         // 最初の文字"あ"の場合、"ん"を表示。そうでない場合、一つ前のひらがなを表示。
                         if index == 0 {
                             if let last = list.last {
-                                navigationPath.append(last)
+                                nextText = last
+                                navigationPath.append(nextText)
                             }
                         } else {
-                            navigationPath.append(list[index - 1])
+                            nextText = list[index - 1]
+                            navigationPath.append(nextText)
                         }
                     }
                 } label: {
@@ -81,8 +87,11 @@ struct PracticeView: View {
                     
                     // 発音再生ボタン
                     Button {
-                        pronunciation.fileName = text
-                        pronunciation.playSound()
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
+                        sounds.fileName = text
+                        sounds.playSound()
                     } label: {
                         Image(systemName: "waveform")
                             .resizable()
@@ -95,6 +104,11 @@ struct PracticeView: View {
                     
                     // 削除ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
+                        sounds.fileName = setting.eraserSound
+                        sounds.playSound()
                         endedDrawPoints.removeAll()
                     } label: {
                         Image(systemName: "trash")
@@ -108,6 +122,9 @@ struct PracticeView: View {
                     
                     // 書き順矢印の表示有無ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         isShowArrow.toggle()
                     } label: {
                         Image(systemName: isShowArrow ?  "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
@@ -121,6 +138,9 @@ struct PracticeView: View {
                     
                     // テキストの表示有無ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         isShowText.toggle()
                     } label: {
                         Circle()
@@ -141,7 +161,7 @@ struct PracticeView: View {
                 Spacer()
                 
                 // キャンバス
-                CanvasView(selectedLevel: $selectedLevel, isDoubleText: $isDoubleText, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, text: text)
+                CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, text: text)
                     .frame(minWidth: setting.canvasMinSize,
                            maxWidth: setting.canvasMaxSize,
                            minHeight: setting.canvasMinSize,
@@ -151,14 +171,19 @@ struct PracticeView: View {
                 
                 // 次のひらがなへ
                 Button {
+                    if isVibration {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    }
                     endedDrawPoints.removeAll()
                     if let index = list.firstIndex(of: text) {
                         navigationPath.removeLast()
                         // 最後の文字"ん"の場合、"あ"を表示。そうでない場合、次のひらがなを表示。
                         if index == list.count - 1 {
-                            navigationPath.append(list[0])
+                            nextText = list[0]
+                            navigationPath.append(nextText)
                         } else {
-                            navigationPath.append(list[index + 1])
+                            nextText = list[index + 1]
+                            navigationPath.append(nextText)
                         }
                     }
                 } label: {
@@ -174,7 +199,6 @@ struct PracticeView: View {
         }
         .onChange(of: endedDrawPoints) { points in
             if points.count == 1 {
-                print("created")
                 addClearedText()
             }
         }
@@ -186,7 +210,6 @@ struct PracticeView: View {
     private func addClearedText() {
         let newText = Entity(context: viewContext)
         newText.clearedText = text
-        
         do {
             try viewContext.save()
         } catch {
@@ -197,6 +220,6 @@ struct PracticeView: View {
 
 struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(5), isDoubleText: .constant(false), text: "ン")
+        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(5), nextText: .constant("あ"), isVibration: .constant(true), text: "ン")
     }
 }

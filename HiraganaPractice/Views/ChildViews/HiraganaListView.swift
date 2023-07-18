@@ -13,11 +13,14 @@ struct HiraganaListView: View {
     var data: FetchedResults<Entity>
     
     let setting = Setting()
+    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
-//    @State private var backgroundColor: Color = .white
     @State private var clearedTextCount: Int = 0            // クリアしたテキスト数
+    @State private var isShowYellowModeAlert: Bool = false  // イエローモードアラートの表示有無
+    @State private var isShowAllClearAlert: Bool = false    // 全クリアアラートの表示有無
+    @State private var isYellowMode: Bool = false           // イエローモードの発動有無。テキストの半分以上クリア = true、半分以下 = false。
     var list: [String] {
         switch selectedLevel {
         case 1:
@@ -65,11 +68,11 @@ struct HiraganaListView: View {
                                             .font(.mincho(ofSize: isDoubleText ? 25 : 40))
                                     }
                                     .overlay {
-                                        if checkCleared(text) {
+                                        if checkClearedText(text) {
                                             HanamaruView()
                                         }
                                     }
-                                    .background(checkCleared(text) ? setting.clearedTextBackgroundColor : Color(.white))
+                                    .background(checkClearedText(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
                             }
                         }
                     }
@@ -78,7 +81,23 @@ struct HiraganaListView: View {
             }
         }
         .onAppear {
+            clearedTextCount = 0
             countClearedText()
+        }
+        .alert("", isPresented: $isShowYellowModeAlert) {
+            Button("OK") {
+                isYellowMode = true
+                isShowYellowModeAlert = false
+            }
+        } message: {
+            Text("やっと半分クリアしたね。残りの黄色の文字を練習しよう！")
+        }
+        .alert("", isPresented: $isShowAllClearAlert) {
+            Button("OK") {
+                isShowAllClearAlert = false
+            }
+        } message: {
+            Text("おめでとう！このレベル全てクリアしたね。準備できたら次のレベルにいこう。")
         }
     }
     
@@ -86,7 +105,7 @@ struct HiraganaListView: View {
     /// - Parameters:
     ///   - text: 検索するテキスト
     /// - Returns:　指定のテキストがクリアしたテキストとして保存されていたらtrue、見つからなかった場合false。
-    private func checkCleared(_ text: String) -> Bool {
+    private func checkClearedText(_ text: String) -> Bool {
         for data in data {
             if data.clearedText == text {
                 return true
@@ -95,15 +114,70 @@ struct HiraganaListView: View {
         return false
     }
     
+    /// クリアしたテキストの数を数える。また、クリアしたテキストがリストの数と一致（全てクリアした）場合、Modelにクリアしたレベルを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
     private func countClearedText() {
+        var isHalfCleared: Bool = false                 // 半分クリアしたか否か
+        var isCleared: Bool = false                     // 全てクリアしたか否か
+        
         for data in data {
             if let text = data.clearedText {
                 // モデルに保存済みのテキストが選択したレベルのテキストに含まれていた場合、カウントを1加える。
                 if list.contains(text) {
                     clearedTextCount += 1
-                    print(clearedTextCount)
+//                    print("クリア:\(clearedTextCount)")
                 }
+            } else if data.halfClearedLevel == selectedLevel {
+                isYellowMode = true
+                isHalfCleared = true
+            } else if data.clearedLevel == selectedLevel {
+                isCleared = true
             }
+        }
+        
+        var blankRemovedList = list
+        blankRemovedList.removeAll(where: {$0 == ""})
+//        print("全テキスト:\(blankRemovedList.count)")
+        
+        if blankRemovedList.count <= clearedTextCount && !isCleared {
+            // クリアしたテキスト数と、元のテキスト数が同じ（全てクリアした）且つそれが初回の場合、Modelにクリアしたレベルを保存する。
+            addClearedLebel()
+            isShowAllClearAlert = true
+            sounds.fileName = setting.yellowModeAlertSound
+            sounds.playSound()
+        } else if ((blankRemovedList.count / 2) <= clearedTextCount) && !isHalfCleared {
+            // クリアしたテキスト数が、元のテキスト数の半分以上（半分クリアした）場合、イエローモード発動。
+            addHalfClearedLebel()
+            isShowYellowModeAlert = true
+            sounds.fileName = setting.yellowModeAlertSound
+            sounds.playSound()
+        }
+    }
+    
+    /// Modelにクリアしたレベルを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func addClearedLebel() {
+        let newLevel = Entity(context: viewContext)
+        newLevel.clearedLevel = Int16(selectedLevel)
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
+        }
+    }
+    
+    /// Modelに半分クリアしたレベルを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func addHalfClearedLebel() {
+        let newLevel = Entity(context: viewContext)
+        newLevel.halfClearedLevel = Int16(selectedLevel)
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
         }
     }
 }

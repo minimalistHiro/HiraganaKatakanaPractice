@@ -22,6 +22,7 @@
 		FDC7B3F42A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDC7B3F32A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf */; };
 		FDC7B3F62A5C20B600E581D0 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3F52A5C20B600E581D0 /* Arrow.swift */; };
 		FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3F72A5CFC4400E581D0 /* HiraganaArrowView.swift */; };
+		FDD448D22A6420250077E42B /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD448D12A6420250077E42B /* BGM.swift */; };
 		FDEF0A9E2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */; };
 		FDEF0AA02A5E4D6000BEBB29 /* CurveArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */; };
 		FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */; };
@@ -31,7 +32,7 @@
 		FDEF0AAA2A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AA92A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift */; };
 		FDEF0AAC2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AAB2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift */; };
 		FDEF0AAE2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AAD2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift */; };
-		FDEF0AB12A5EF0B600BEBB29 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */; };
+		FDEF0AB12A5EF0B600BEBB29 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AB02A5EF0B600BEBB29 /* Sounds.swift */; };
 		FDEF0AB32A6018B300BEBB29 /* LevelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */; };
 		FDF190902A61105C0030F5C6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDF1908E2A61105B0030F5C6 /* Model.xcdatamodeld */; };
 		FDF190922A61233A0030F5C6 /* HanamaruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF190912A61233A0030F5C6 /* HanamaruView.swift */; };
@@ -56,6 +57,7 @@
 		FDC7B3F32A5BE6B100E581D0 /* BIZUDPMincho-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BIZUDPMincho-Regular.ttf"; sourceTree = "<group>"; };
 		FDC7B3F52A5C20B600E581D0 /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		FDC7B3F72A5CFC4400E581D0 /* HiraganaArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaArrowView.swift; sourceTree = "<group>"; };
+		FDD448D12A6420250077E42B /* BGM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 		FDEF0A9D2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaSonantArrowView.swift; sourceTree = "<group>"; };
 		FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveArrow.swift; sourceTree = "<group>"; };
 		FDEF0AA12A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDiphthongArrowView.swift; sourceTree = "<group>"; };
@@ -65,7 +67,7 @@
 		FDEF0AA92A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaSonantArrowView.swift; sourceTree = "<group>"; };
 		FDEF0AAB2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaDiphthongArrowView.swift; sourceTree = "<group>"; };
 		FDEF0AAD2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaDiphthongSonantArrowView.swift; sourceTree = "<group>"; };
-		FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
+		FDEF0AB02A5EF0B600BEBB29 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelButtonView.swift; sourceTree = "<group>"; };
 		FDF1908F2A61105B0030F5C6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		FDF190912A61233A0030F5C6 /* HanamaruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanamaruView.swift; sourceTree = "<group>"; };
@@ -211,7 +213,8 @@
 		FDEF0AAF2A5EF09C00BEBB29 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				FDEF0AB02A5EF0B600BEBB29 /* Pronunciation.swift */,
+				FDEF0AB02A5EF0B600BEBB29 /* Sounds.swift */,
+				FDD448D12A6420250077E42B /* BGM.swift */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -288,7 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */,
-				FDEF0AB12A5EF0B600BEBB29 /* Pronunciation.swift in Sources */,
+				FDEF0AB12A5EF0B600BEBB29 /* Sounds.swift in Sources */,
 				FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */,
 				FDF190922A61233A0030F5C6 /* HanamaruView.swift in Sources */,
 				FDEF0AAE2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift in Sources */,
@@ -310,6 +313,7 @@
 				FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */,
 				FDF190942A6144C40030F5C6 /* SettingView.swift in Sources */,
 				FDEF0AB32A6018B300BEBB29 /* LevelButtonView.swift in Sources */,
+				FDD448D22A6420250077E42B /* BGM.swift in Sources */,
 				FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */,
 				FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */,
 				FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */,

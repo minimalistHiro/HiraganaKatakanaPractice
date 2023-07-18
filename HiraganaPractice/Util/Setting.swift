@@ -17,7 +17,8 @@ final class Setting {
     let textShowButtonSize: CGFloat = 25                    // テキストの表示有無のボタンサイズ
     
     // ユーザーインターフェース
-    let lineWidth: CGFloat = 15                             // 線の太さ
+    let largeTextCanvasLineWidth: CGFloat = 15              // 大きい文字の線の太さ
+    let smallTextCanvasLineWidth: CGFloat = 10              // 小さい文字の線の太さ
     
     // カラー
     // 背景色
@@ -25,6 +26,14 @@ final class Setting {
     let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")       // ひらがな
     let katakanaBackgroundColor: Color = Color("KatakanaBackgroundColor")       // カタカナ
     let clearedTextBackgroundColor: Color = Color("ClearedTextBackgroundColor") // クリア後のテキスト
+    let yellowModeBackgroundColor: Color = Color("YellowModeBackgroundColor")   // イエローモードの背景色
+    
+    // 画像名
+    let hanamaru: String = String("Hanamaru")               // はなまる
+    
+    // サウンド名
+    let yellowModeAlertSound: String = String("Success")    // イエローモード発動のアラート音
+    let eraserSound: String = String("Cancel")              // 消しゴム音
     
     // ひらがな50音
     let hiraganaList: [String] = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]
@@ -35,12 +44,12 @@ final class Setting {
     let hiraganaSonantReverseList: [String] = ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ", "ば", "び", "ぶ", "べ", "ぼ", "だ", "ぢ", "づ", "で", "ど", "ざ", "じ", "ず", "ぜ", "ぞ", "が", "ぎ", "ぐ", "げ", "ご"]
     
     // ひらがな拗音
-    let hiraganaDiphthongList: [String] = ["きゃ", "きゅ", "きょ", "しゃ", "しゅ", "しょ", "ちゃ", "ちゅ", "ちょ", "にゃ", "にゅ", "にょ", "ひゃ", "ひゅ", "ひょ", "ふぁ", "ふぃ", "ふぇ", "ふぉ", "みゃ", "みゅ", "みょ", "りゃ", "りゅ", "りょ"]
-    let hiraganaDiphthongReverseList: [String] = ["りゃ", "", "りゅ", "", "りょ", "みゃ", "", "みゅ", "", "みょ", "ふぁ", "ふぃ", "", "ふぇ", "ふぉ", "ひゃ", "", "ひゅ", "", "ひょ", "にゃ", "", "にゅ", "", "にょ", "ちゃ", "", "ちゅ", "", "ちょ", "しゃ", "", "しゅ", "", "しょ", "きゃ", "", "きゅ", "", "きょ"]
+    let hiraganaDiphthongList: [String] = ["きゃ", "きゅ", "きょ", "しゃ", "しゅ", "しょ", "ちゃ", "ちゅ", "ちょ", "にゃ", "にゅ", "にょ", "ひゃ", "ひゅ", "ひょ", "みゃ", "みゅ", "みょ", "りゃ", "りゅ", "りょ"]
+    let hiraganaDiphthongReverseList: [String] = ["りゃ", "", "りゅ", "", "りょ", "みゃ", "", "みゅ", "", "みょ", "ひゃ", "", "ひゅ", "", "ひょ", "にゃ", "", "にゅ", "", "にょ", "ちゃ", "", "ちゅ", "", "ちょ", "しゃ", "", "しゅ", "", "しょ", "きゃ", "", "きゅ", "", "きょ"]
     
     // ひらがな拗音濁音
-    let hiraganaDiphthongSonantList: [String] = ["ぎゃ", "ぎゅ", "ぎょ", "じゃ", "じゅ", "じょ", "ぢゃ", "ぢゅ", "ぢょ", "びゃ", "びゅ", "びょ", "ぴゃ", "ぴゅ", "ぴょ"]
-    let hiraganaDiphthongSonantReverseList: [String] = ["ぴゃ", "", "ぴゅ", "", "ぴょ", "びゃ", "", "びゅ", "", "びょ", "ぢゃ", "", "ぢゅ", "", "ぢょ", "じゃ", "", "じゅ", "", "じょ", "ぎゃ", "", "ぎゅ", "", "ぎょ"]
+    let hiraganaDiphthongSonantList: [String] = ["ぎゃ", "ぎゅ", "ぎょ", "じゃ", "じゅ", "じょ", "びゃ", "びゅ", "びょ", "ぴゃ", "ぴゅ", "ぴょ"]
+    let hiraganaDiphthongSonantReverseList: [String] = ["ぴゃ", "", "ぴゅ", "", "ぴょ", "びゃ", "", "びゅ", "", "びょ", "じゃ", "", "じゅ", "", "じょ", "ぎゃ", "", "ぎゅ", "", "ぎょ"]
     
     // カタカナ50音
     let katakanaList: [String] = ["ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン"]
@@ -51,11 +60,11 @@ final class Setting {
     let katakanaSonantReverseList: [String] = ["パ", "ピ", "プ", "ペ", "ポ", "バ", "ビ", "ブ", "ベ", "ボ", "ダ", "ヂ", "ヅ", "デ", "ド", "ザ", "ジ", "ズ", "ゼ", "ゾ", "ガ", "ギ", "グ", "ゲ", "ゴ"]
     
     // カタカナ拗音
-    let katakanaDiphthongList: [String] = ["キャ", "キュ", "キョ", "シャ", "シュ", "ショ", "チャ", "チュ", "チョ", "ニャ", "ニュ", "ニョ", "ヒャ", "ヒュ", "ヒョ", "ファ", "フィ", "フェ", "フォ", "ミャ", "ミュ", "ミョ", "リャ", "リュ", "リョ"]
-    let katakanaDiphthongReverseList: [String] = ["リャ", "", "リュ", "", "リョ", "ミャ", "", "ミュ", "", "ミョ", "ファ", "フィ", "", "フェ", "フォ", "ヒャ", "", "ヒュ", "", "ヒョ",  "ニャ", "", "ニュ", "", "ニョ", "チャ", "", "チュ", "", "チョ", "シャ", "", "シュ", "", "ショ", "キャ", "", "キュ", "", "キョ"]
+    let katakanaDiphthongList: [String] = ["キャ", "キュ", "キョ", "シャ", "シュ", "ショ", "チャ", "チュ", "チョ", "ニャ", "ニュ", "ニョ", "ヒャ", "ヒュ", "ヒョ", "ミャ", "ミュ", "ミョ", "リャ", "リュ", "リョ"]
+    let katakanaDiphthongReverseList: [String] = ["リャ", "", "リュ", "", "リョ", "ミャ", "", "ミュ", "", "ミョ", "ヒャ", "", "ヒュ", "", "ヒョ",  "ニャ", "", "ニュ", "", "ニョ", "チャ", "", "チュ", "", "チョ", "シャ", "", "シュ", "", "ショ", "キャ", "", "キュ", "", "キョ"]
     
     // カタカナ拗音濁音
-    let katakanaDiphthongSonantList: [String] = ["ギャ", "ギュ", "ギョ", "ジャ", "ジュ", "ジョ", "ヂャ", "ヂュ", "ヂョ", "ビャ", "ビュ", "ビョ", "ピャ", "ピュ", "ピョ"]
-    let katakanaDiphthongSonantReverseList: [String] = ["ピャ", "", "ピュ", "", "ピョ", "ビャ", "", "ビュ", "", "ビョ", "ヂャ", "", "ヂュ", "", "ヂョ", "ジャ", "", "ジュ", "", "ジョ", "ギャ", "", "ギュ", "", "ギョ"]
+    let katakanaDiphthongSonantList: [String] = ["ギャ", "ギュ", "ギョ", "ジャ", "ジュ", "ジョ", "ビャ", "ビュ", "ビョ", "ピャ", "ピュ", "ピョ"]
+    let katakanaDiphthongSonantReverseList: [String] = ["ピャ", "", "ピュ", "", "ピョ", "ビャ", "", "ビュ", "", "ビョ", "ジャ", "", "ジュ", "", "ジョ", "ギャ", "", "ギュ", "", "ギョ"]
 }
 

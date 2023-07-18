@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct LevelButtonView: View {
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(sortDescriptors: [])
+    var data: FetchedResults<Entity>
+    
+    let setting = Setting()
     let level: Int
     let backgroundColor: Color
     
     var body: some View {
-        ZStack {
+//        ZStack {
             Capsule()
                 .foregroundColor(backgroundColor)
                 .frame(width: 180, height: 45)
@@ -25,19 +30,36 @@ struct LevelButtonView: View {
                     Text("Level \(level)")
                 }
                 .shadow(radius: 5, x: 0, y: 4)
-            HStack {
-                Image("Hanamaru")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80)
-                // 右側にスペースを開けるために、透明の適当なイメージをセット。
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.clear)
-                    .frame(width: 160)
+                .overlay {
+                    HStack {
+                        // クリア済みのレベルのみ、はなまるをつける。
+                        if checkClearedLevel() {
+                            Image(setting.hanamaru)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 80)
+                            // 右側にスペースを開けるために、透明の適当なイメージをセット。
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.clear)
+                                .frame(width: 160)
+                        }
+                    }
+                }
+//        }
+    }
+    
+    /// 指定のレベルがクリアしたレベルとしてModelに保存されているかチェック。
+    /// - Parameters: なし
+    /// - Returns:　指定のレベルがクリアしたレベルとして保存されていたらtrue、見つからなかった場合false。
+    private func checkClearedLevel() -> Bool {
+        for data in data {
+            if data.clearedLevel == Int32(level) {
+                return true
             }
         }
+        return false
     }
 }
 

@@ -17,6 +17,13 @@ struct LevelSelectView: View {
     
     var body: some View {
         HStack {
+            // ひらがな、カタカナレベルセレクトを中心にため、透明の適当なイメージをセット。
+            Image(systemName: "gear")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40)
+                .foregroundColor(.clear)
+            
             Spacer()
             
             VStack {
@@ -95,7 +102,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(5)
                     } label: {
-                        LevelButtonView(level: 1, backgroundColor: setting.katakanaBackgroundColor)
+                        LevelButtonView(level: 5, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -107,7 +114,7 @@ struct LevelSelectView: View {
                         isDoubleText = false
                         navigationPath.append(6)
                     } label: {
-                        LevelButtonView(level: 2, backgroundColor: setting.katakanaBackgroundColor)
+                        LevelButtonView(level: 6, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -119,7 +126,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(7)
                     } label: {
-                        LevelButtonView(level: 3, backgroundColor: setting.katakanaBackgroundColor)
+                        LevelButtonView(level: 7, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -131,7 +138,7 @@ struct LevelSelectView: View {
                         isDoubleText = true
                         navigationPath.append(8)
                     } label: {
-                        LevelButtonView(level: 4, backgroundColor: setting.katakanaBackgroundColor)
+                        LevelButtonView(level: 8, backgroundColor: setting.katakanaBackgroundColor)
                     }
                     .font(.system(size: levelTextSize))
                     Spacer()
@@ -140,21 +147,23 @@ struct LevelSelectView: View {
             .foregroundColor(.black)
             
             Spacer()
+            
+            VStack {
+                Spacer()
+                
+                Button {
+                    navigationPath.append(TappedButtons.tappedSetting)
+                } label: {
+                    Image(systemName: "gear")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40)
+                        .foregroundColor(.black)
+                }
+                .padding(.vertical)
+            }
         }
         .background(setting.topViewBackgroundColor)
-        //            .toolbar {
-        //                ToolbarItem(placement: .navigationBarTrailing) {
-        //                    Button {
-        //                        navigationPath.append(TappedButtons.tappedSetting)
-        //                    } label: {
-        //                        Image(systemName: "gear")
-        //                            .resizable()
-        //                            .scaledToFit()
-        //                            .frame(width: 30)
-        //                            .foregroundColor(.black)
-        //                    }
-        //                }
-        //            }
     }
 }
 

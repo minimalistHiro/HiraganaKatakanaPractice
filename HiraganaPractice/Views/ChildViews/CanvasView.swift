@@ -14,7 +14,6 @@ struct CanvasView: View {
     
     let setting = Setting()
     @Binding var selectedLevel: Int
-    @Binding var isDoubleText: Bool
     @Binding var endedDrawPoints: [DrawPoints]
     @Binding var isShowArrow: Bool
     @Binding var isShowText: Bool
@@ -24,7 +23,6 @@ struct CanvasView: View {
     static var canvasGetSize: CGFloat = .zero                       // canvasの取得サイズ
     @State private var isGetCanvasSize: Bool = false                // canvasサイズを取得したか否か
     let text: String                                                // 取得したテキスト1文字
-//    let savedText: String                                           // セーブ用テキスト
     
     var body: some View {
         GeometryReader { geometry in
@@ -39,14 +37,14 @@ struct CanvasView: View {
                     Path { path in
                         path.addLines(data.points)
                     }
-                    .stroke(.black, style: StrokeStyle(lineWidth: setting.lineWidth, lineCap: .round, lineJoin: .round))
+                    .stroke(.black, style: StrokeStyle(lineWidth: isCheckSmallText() ? setting.smallTextCanvasLineWidth : setting.largeTextCanvasLineWidth, lineCap: .round, lineJoin: .round))
                 }
                 
                 // ドラッグ中の描画。指を離したらここの描画は消えるがDrawPathViewが上書きするので見た目は問題ない
                 Path { path in
                     path.addLines(tmpDrawPoints.points)
                 }
-                .stroke(.black, style: StrokeStyle(lineWidth: setting.lineWidth, lineCap: .round, lineJoin: .round))
+                .stroke(.black, style: StrokeStyle(lineWidth: isCheckSmallText() ? setting.smallTextCanvasLineWidth : setting.largeTextCanvasLineWidth, lineCap: .round, lineJoin: .round))
                 
                 // 点線
                 WidthLine()
@@ -60,7 +58,7 @@ struct CanvasView: View {
                 
                 // 表示文字。小さいひらがなの場合、文字を小さくする。そのほかの平仮名はそのまま表示。
                 if isShowText {
-                    if text.contains("ゃ") || text.contains("ゅ") || text.contains("ょ") || text.contains("ぁ") || text.contains("ぃ") || text.contains("ぇ") || text.contains("ぉ") || text.contains("ャ") || text.contains("ュ") || text.contains("ョ") || text.contains("ァ") || text.contains("ィ") || text.contains("ェ") || text.contains("ォ") {
+                    if isCheckSmallText() {
                         VStack {
                             Spacer()
                             HStack {
@@ -157,11 +155,22 @@ struct CanvasView: View {
     ///   - point: 終わりの座標
     /// - Returns: 終わりの座標がcanvas内に含まれるならtrue、それ以外ならfalse
     private func drawingRange(point: CGPoint) -> Bool {
-        let minX = canvasLocalRect.minX + (setting.lineWidth / 2) + setting.canvasBorderWidth
-        let maxX = canvasLocalRect.maxX - (setting.lineWidth / 2) + setting.canvasBorderWidth
-        let minY = canvasLocalRect.minY + (setting.lineWidth / 2) + setting.canvasBorderWidth
-        let maxY = canvasLocalRect.maxY - (setting.lineWidth / 2) + setting.canvasBorderWidth
+        let minX = canvasLocalRect.minX + (setting.largeTextCanvasLineWidth / 2) + setting.canvasBorderWidth
+        let maxX = canvasLocalRect.maxX - (setting.largeTextCanvasLineWidth / 2) + setting.canvasBorderWidth
+        let minY = canvasLocalRect.minY + (setting.largeTextCanvasLineWidth / 2) + setting.canvasBorderWidth
+        let maxY = canvasLocalRect.maxY - (setting.largeTextCanvasLineWidth / 2) + setting.canvasBorderWidth
         return (point.x >= minX && point.x <= maxX) && (point.y >= minY && point.y <= maxY)
+    }
+    
+    /// テキストが小さい文字かどうかをチェックする。
+    /// - Parameters: なし
+    /// - Returns: 小さい文字ならtrue、大きい文字ならfalse。
+    private func isCheckSmallText() -> Bool {
+        if text.contains("ゃ") || text.contains("ゅ") || text.contains("ょ") || text.contains("ぁ") || text.contains("ぃ") || text.contains("ぇ") || text.contains("ぉ") || text.contains("ャ") || text.contains("ュ") || text.contains("ョ") || text.contains("ァ") || text.contains("ィ") || text.contains("ェ") || text.contains("ォ") {
+            return true
+        } else {
+            return false
+        }
     }
     
     /// 表示するテキストのサイズを端末サイズに合わせて変更する。
@@ -171,24 +180,10 @@ struct CanvasView: View {
     private func resizeTextSize(_ textSize: CGFloat) -> CGFloat {
         return textSize * (CanvasView.canvasGetSize / setting.canvasMaxSize)
     }
-    
-    /// Modelにクリアしたテキストを保存する。
-    /// - Parameters: なし
-    /// - Returns: なし
-//    private func addClearedText() {
-//        let newText = Entity(context: viewContext)
-//        newText.clearedText = savedText
-//
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            fatalError("セーブに失敗")
-//        }
-//    }
 }
 
 struct CanvasView_Previews: PreviewProvider {
     static var previews: some View {
-        CanvasView(selectedLevel: .constant(1), isDoubleText: .constant(false), endedDrawPoints: .constant([]), isShowArrow: .constant(true), isShowText: .constant(true), text: "あ")
+        CanvasView(selectedLevel: .constant(1), endedDrawPoints: .constant([]), isShowArrow: .constant(true), isShowText: .constant(true), text: "あ")
     }
 }

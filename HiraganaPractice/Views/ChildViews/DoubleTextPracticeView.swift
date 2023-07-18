@@ -14,10 +14,11 @@ struct DoubleTextPracticeView: View {
     var data: FetchedResults<Entity>
     
     let setting = Setting()
-    let pronunciation = Pronunciation()
+    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
-    @Binding var isDoubleText: Bool
+    @Binding var nextText: String
+    @Binding var isVibration: Bool
     @State private var endedDrawPoints1: [DrawPoints] = []          // ペンで描いた座標を格納する変数1
     @State private var endedDrawPoints2: [DrawPoints] = []          // ペンで描いた座標を格納する変数2
     @State private var isShowArrow: Bool = true                     // 書き順矢印の表示有無
@@ -59,8 +60,11 @@ struct DoubleTextPracticeView: View {
                     
                     // 発音再生ボタン
                     Button {
-                        pronunciation.fileName = text
-                        pronunciation.playSound()
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
+                        sounds.fileName = text
+                        sounds.playSound()
                     } label: {
                         Image(systemName: "waveform")
                             .resizable()
@@ -73,6 +77,11 @@ struct DoubleTextPracticeView: View {
                     
                     // 削除ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
+                        sounds.fileName = setting.eraserSound
+                        sounds.playSound()
                         endedDrawPoints1.removeAll()
                         endedDrawPoints2.removeAll()
                     } label: {
@@ -87,6 +96,9 @@ struct DoubleTextPracticeView: View {
                     
                     // 書き順矢印の表示有無ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         isShowArrow.toggle()
                     } label: {
                         Image(systemName: isShowArrow ?  "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
@@ -100,6 +112,9 @@ struct DoubleTextPracticeView: View {
                     
                     // テキストの表示有無ボタン
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         isShowText.toggle()
                     } label: {
                         Circle()
@@ -122,6 +137,9 @@ struct DoubleTextPracticeView: View {
                     
                     // 一つ前のひらがなへ
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         endedDrawPoints1.removeAll()
                         endedDrawPoints2.removeAll()
                         if let index = list.firstIndex(of: text) {
@@ -129,10 +147,12 @@ struct DoubleTextPracticeView: View {
                             // 最初の文字"あ"の場合、"ん"を表示。そうでない場合、一つ前のひらがなを表示。
                             if index == 0 {
                                 if let last = list.last {
-                                    navigationPath.append(last)
+                                    nextText = last
+                                    navigationPath.append(nextText)
                                 }
                             } else {
-                                navigationPath.append(list[index - 1])
+                                nextText = list[index - 1]
+                                navigationPath.append(nextText)
                             }
                         }
                     } label: {
@@ -146,14 +166,14 @@ struct DoubleTextPracticeView: View {
                     Spacer()
                     
                     // キャンバス
-                    CanvasView(selectedLevel: $selectedLevel, isDoubleText: $isDoubleText, endedDrawPoints: $endedDrawPoints1, isShowArrow: $isShowArrow, isShowText: $isShowText, text: String(text.prefix(1)))
+                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints1, isShowArrow: $isShowArrow, isShowText: $isShowText, text: String(text.prefix(1)))
                         .frame(minWidth: setting.canvasMinSize,
                                maxWidth: setting.canvasMaxSize,
                                minHeight: setting.canvasMinSize,
                                maxHeight: setting.canvasMaxSize)
                         .scaledToFit()
                     
-                    CanvasView(selectedLevel: $selectedLevel, isDoubleText: $isDoubleText, endedDrawPoints: $endedDrawPoints2, isShowArrow: $isShowArrow, isShowText: $isShowText, text: String(text.suffix(1)))
+                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints2, isShowArrow: $isShowArrow, isShowText: $isShowText, text: String(text.suffix(1)))
                         .frame(minWidth: setting.canvasMinSize,
                                maxWidth: setting.canvasMaxSize,
                                minHeight: setting.canvasMinSize,
@@ -164,15 +184,20 @@ struct DoubleTextPracticeView: View {
                     
                     // 次のひらがなへ
                     Button {
+                        if isVibration {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        }
                         endedDrawPoints1.removeAll()
                         endedDrawPoints2.removeAll()
                         if let index = list.firstIndex(of: text) {
                             navigationPath.removeLast()
                             // 最後の文字"ん"の場合、"あ"を表示。そうでない場合、次のひらがなを表示。
                             if index == list.count - 1 {
-                                navigationPath.append(list[0])
+                                nextText = list[0]
+                                navigationPath.append(nextText)
                             } else {
-                                navigationPath.append(list[index + 1])
+                                nextText = list[index + 1]
+                                navigationPath.append(nextText)
                             }
                         }
                     } label: {
@@ -195,8 +220,10 @@ struct DoubleTextPracticeView: View {
             }
             
             // 2升とも記入済みの場合、Modelにクリアしたテキストを保存する。
-            if textDrawCount >= 2 {
+            if textDrawCount == 2 {
                 addClearedText()
+                // 再度テキストをModelに保存しないように、何升記入済みかのカウントを初期化する。
+                textDrawCount = 0
             }
         }
         .onChange(of: endedDrawPoints2) { points in
@@ -205,8 +232,10 @@ struct DoubleTextPracticeView: View {
             }
             
             // 2升とも記入済みの場合、Modelにクリアしたテキストを保存する。
-            if textDrawCount >= 2 {
+            if textDrawCount == 2 {
                 addClearedText()
+                // 再度テキストをModelに保存しないように、何升記入済みかのカウントを初期化する。
+                textDrawCount = 0
             }
         }
     }
@@ -217,7 +246,6 @@ struct DoubleTextPracticeView: View {
     private func addClearedText() {
         let newText = Entity(context: viewContext)
         newText.clearedText = text
-        
         do {
             try viewContext.save()
         } catch {
@@ -228,6 +256,6 @@ struct DoubleTextPracticeView: View {
 
 struct DoubleTextPracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(7), isDoubleText: .constant(true), text: "フォ")
+        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(7), nextText: .constant("きゃ"), isVibration: .constant(true), text: "フォ")
     }
 }

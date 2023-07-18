@@ -17,6 +17,19 @@ enum TappedButtons: String, CaseIterable {
     case tappedSetting
 }
 
+struct AlertEntity {
+    // アラートボタンの個数
+    enum AlertButton {
+        case single
+        case double
+    }
+    let title: String
+    let message: String
+    let actionText: String
+    let cancelText: String
+    let button: AlertButton
+}
+
 struct PersistenceController {
     let container: NSPersistentContainer
     

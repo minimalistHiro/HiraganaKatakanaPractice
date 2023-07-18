@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct HanamaruView: View {
+    let setting = Setting()
+    
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Image("Hanamaru")
+                Image(setting.hanamaru)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20)

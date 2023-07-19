@@ -208,6 +208,13 @@ struct PracticeView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func addClearedText() {
+        // テキストがクリア済みの場合、returnする。
+        for data in data {
+            if data.clearedText == text {
+                return
+            }
+        }
+        
         let newText = Entity(context: viewContext)
         newText.clearedText = text
         do {

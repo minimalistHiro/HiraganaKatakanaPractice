@@ -23,6 +23,7 @@ struct LevelSelectView: View {
                 .scaledToFit()
                 .frame(width: 40)
                 .foregroundColor(.clear)
+                .padding()
             
             Spacer()
             
@@ -160,7 +161,7 @@ struct LevelSelectView: View {
                         .frame(width: 40)
                         .foregroundColor(.black)
                 }
-                .padding(.vertical)
+                .padding()
             }
         }
         .background(setting.topViewBackgroundColor)

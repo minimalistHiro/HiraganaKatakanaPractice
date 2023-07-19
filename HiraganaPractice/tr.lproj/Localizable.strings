@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  HiraganaPractice
+
+  Created by 金子広樹 on 2023/07/18.
+  
+*/
+
+// MARK: - Setting
+"Background Music" = "Arka plan müziği";
+"Vibration" = "Titreşim";
+"Delete data" = "Verileri sil";
+
+// MARK: - Alert
+// TappedDeleteButton
+"Delete all?" = "Hepsini sil?";
+"Delete" = "Silmek";
+"Cancel" = "İptal etmek";
+// AfterDelete
+"It has been deleted." = "Silindi.";
+"OK" = "TAMAM";
+
+// MARK: - HiraganaListView
+"I'm finally halfway through. Practice the remaining yellow letters!" = "Sonunda yarısına geldim. Kalan sarı harfleri uygulayın!";
+"Congratulation! You've cleared everything. Go to the next level when you are ready." = "Tebrikler! Her şeyi temizledin. Hazır olduğunuzda bir sonraki seviyeye geçin.";

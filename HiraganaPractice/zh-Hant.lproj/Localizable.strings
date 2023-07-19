@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  HiraganaPractice
+
+  Created by 金子広樹 on 2023/07/18.
+  
+*/
+
+// MARK: - Setting
+"Background Music" = "背景音樂";
+"Vibration" = "振動";
+"Delete data" = "刪除數據";
+
+// MARK: - Alert
+// TappedDeleteButton
+"Delete all?" = "刪除所有？";
+"Delete" = "刪除";
+"Cancel" = "取消";
+// AfterDelete
+"It has been deleted." = "它已被刪除。";
+"OK" = "好的";
+
+// MARK: - HiraganaListView
+"I'm finally halfway through. Practice the remaining yellow letters!" = "我終於完成一半了 練習剩下的黃色字母！";
+"Congratulation! You've cleared everything. Go to the next level when you are ready." = "恭喜！ 你已經清除了一切。 準備好後進入下一個級別。";

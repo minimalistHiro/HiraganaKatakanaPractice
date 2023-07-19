@@ -17,6 +17,7 @@ struct HiraganaListView: View {
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
+    @State private var clearedText: [String] = []           // クリアしたテキスト
     @State private var clearedTextCount: Int = 0            // クリアしたテキスト数
     @State private var isShowYellowModeAlert: Bool = false  // イエローモードアラートの表示有無
     @State private var isShowAllClearAlert: Bool = false    // 全クリアアラートの表示有無
@@ -58,7 +59,7 @@ struct HiraganaListView: View {
             LazyHGrid(rows: Array(repeating: GridItem(), count: 5)) {
                 ForEach(list, id: \.self) { text in
                     NavigationLink(value: text) {
-                        if text != "" {
+                        if !text.contains("空白") {
                             ZStack {
                                 Rectangle()
                                     .stroke(lineWidth: 3)
@@ -68,11 +69,11 @@ struct HiraganaListView: View {
                                             .font(.mincho(ofSize: isDoubleText ? 25 : 40))
                                     }
                                     .overlay {
-                                        if checkClearedText(text) {
+                                        if clearedText.contains(text) {
                                             HanamaruView()
                                         }
                                     }
-                                    .background(checkClearedText(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
+                                    .background(clearedText.contains(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
                             }
                         }
                     }
@@ -90,14 +91,14 @@ struct HiraganaListView: View {
                 isShowYellowModeAlert = false
             }
         } message: {
-            Text("やっと半分クリアしたね。残りの黄色の文字を練習しよう！")
+            Text("I'm finally halfway through. Practice the remaining yellow letters!")
         }
         .alert("", isPresented: $isShowAllClearAlert) {
             Button("OK") {
                 isShowAllClearAlert = false
             }
         } message: {
-            Text("おめでとう！このレベル全てクリアしたね。準備できたら次のレベルにいこう。")
+            Text("Congratulation! You've cleared everything. Go to the next level when you are ready.")
         }
     }
     
@@ -105,14 +106,14 @@ struct HiraganaListView: View {
     /// - Parameters:
     ///   - text: 検索するテキスト
     /// - Returns:　指定のテキストがクリアしたテキストとして保存されていたらtrue、見つからなかった場合false。
-    private func checkClearedText(_ text: String) -> Bool {
-        for data in data {
-            if data.clearedText == text {
-                return true
-            }
-        }
-        return false
-    }
+//    private func checkClearedText(_ text: String) -> Bool {
+//        for data in data {
+//            if data.clearedText == text {
+//                return true
+//            }
+//        }
+//        return false
+//    }
     
     /// クリアしたテキストの数を数える。また、クリアしたテキストがリストの数と一致（全てクリアした）場合、Modelにクリアしたレベルを保存する。
     /// - Parameters: なし
@@ -120,11 +121,12 @@ struct HiraganaListView: View {
     private func countClearedText() {
         var isHalfCleared: Bool = false                 // 半分クリアしたか否か
         var isCleared: Bool = false                     // 全てクリアしたか否か
-        
+        clearedText.removeAll()
         for data in data {
             if let text = data.clearedText {
                 // モデルに保存済みのテキストが選択したレベルのテキストに含まれていた場合、カウントを1加える。
                 if list.contains(text) {
+                    clearedText.append(text)
                     clearedTextCount += 1
 //                    print("クリア:\(clearedTextCount)")
                 }
@@ -137,7 +139,7 @@ struct HiraganaListView: View {
         }
         
         var blankRemovedList = list
-        blankRemovedList.removeAll(where: {$0 == ""})
+        blankRemovedList.removeAll(where: {$0.contains("空白")})
 //        print("全テキスト:\(blankRemovedList.count)")
         
         if blankRemovedList.count <= clearedTextCount && !isCleared {

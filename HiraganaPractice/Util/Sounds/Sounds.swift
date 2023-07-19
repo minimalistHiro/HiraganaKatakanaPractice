@@ -14,7 +14,7 @@ class Sounds: NSObject {
     var data = Data()
     
     func playSound() {
-        data = NSDataAsset(name: "\(fileName)")!.data
+        data = NSDataAsset(name: "\(fileName)")?.data ?? Data()
         do {
             player = try AVAudioPlayer(data: data)
             player.stop()

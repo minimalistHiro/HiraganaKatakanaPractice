@@ -80,8 +80,6 @@ struct DoubleTextPracticeView: View {
                         if isVibration {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         }
-                        sounds.fileName = setting.eraserSound
-                        sounds.playSound()
                         endedDrawPoints1.removeAll()
                         endedDrawPoints2.removeAll()
                     } label: {
@@ -238,6 +236,22 @@ struct DoubleTextPracticeView: View {
                 textDrawCount = 0
             }
         }
+        // 戻るボタンを独自実装
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    navigationPath.removeLast()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .bold()
+                }
+                .padding()
+            }
+        }
     }
     
     /// Modelにクリアしたテキストを保存する。
@@ -263,6 +277,6 @@ struct DoubleTextPracticeView: View {
 
 struct DoubleTextPracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(7), nextText: .constant("きゃ"), isVibration: .constant(true), text: "フォ")
+        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(7), nextText: .constant("きゃ"), isVibration: .constant(true), text: "きゃ")
     }
 }

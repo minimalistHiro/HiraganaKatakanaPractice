@@ -27,12 +27,38 @@ struct CanvasView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                // 白紙
                 Rectangle()
                     .foregroundColor(.white)
-                    .border(Color.black, width: setting.canvasBorderWidth)
                     .onAppear {
                         canvasLocalRect = geometry.frame(in: .local)
                     }
+                
+                if isShowText {
+                    if isCheckSmallText() {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Image("‎UDDigiFont\(text)")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: CanvasView.canvasGetSize / 2, maxHeight: CanvasView.canvasGetSize / 2)
+                                Spacer()
+                            }
+                        }
+                    } else {
+                        Image("‎UDDigiFont\(text)")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
+                    }
+                }
+                
+                // 外枠
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .border(Color.black, width: setting.canvasBorderWidth)
+                
                 ForEach(endedDrawPoints) { data in
                     Path { path in
                         path.addLines(data.points)
@@ -57,24 +83,24 @@ struct CanvasView: View {
                     .frame(width: 0.5)
                 
                 // 表示文字。小さいひらがなの場合、文字を小さくする。そのほかの平仮名はそのまま表示。
-                if isShowText {
-                    if isCheckSmallText() {
-                        VStack {
-                            Spacer()
-                            HStack {
-                                Text(text)
-                                    .font(.mincho(ofSize: resizeTextSize(150)))
-                                    .opacity(0.1)
-                                    .padding()
-                                Spacer()
-                            }
-                        }
-                    } else {
-                        Text(text)
-                            .font(.mincho(ofSize: resizeTextSize(250)))
-                            .opacity(0.1)
-                    }
-                }
+//                if isShowText {
+//                    if isCheckSmallText() {
+//                        VStack {
+//                            Spacer()
+//                            HStack {
+//                                Text(text)
+//                                    .font(.mincho(ofSize: resizeTextSize(150)))
+//                                    .opacity(0.1)
+//                                    .padding()
+//                                Spacer()
+//                            }
+//                        }
+//                    } else {
+//                        Text(text)
+//                            .font(.mincho(ofSize: resizeTextSize(250)))
+//                            .opacity(0.1)
+//                    }
+//                }
                 
                 // CanvasViewのサイズ取得後に、各矢印を表示。
                 if isGetCanvasSize {

@@ -9,6 +9,7 @@ import SwiftUI
 
 extension Font {
     static func mincho(ofSize size: CGFloat) -> Font? {
+//        return Font.custom("UDDigiKyokashoProN-Regular", size: size)
         return Font.custom("BIZUDPMincho-Regular", size: size)
     }
 }

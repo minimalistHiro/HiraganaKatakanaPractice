@@ -107,8 +107,6 @@ struct PracticeView: View {
                         if isVibration {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         }
-                        sounds.fileName = setting.eraserSound
-                        sounds.playSound()
                         endedDrawPoints.removeAll()
                     } label: {
                         Image(systemName: "trash")
@@ -202,6 +200,22 @@ struct PracticeView: View {
                 addClearedText()
             }
         }
+        // 戻るボタンを独自実装
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    navigationPath.removeLast()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .bold()
+                }
+                .padding()
+            }
+        }
     }
     
     /// Modelにクリアしたテキストを保存する。
@@ -227,6 +241,6 @@ struct PracticeView: View {
 
 struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(5), nextText: .constant("あ"), isVibration: .constant(true), text: "ン")
+        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(6), nextText: .constant("あ"), isVibration: .constant(true), text: "デ")
     }
 }

@@ -64,7 +64,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(for: TappedButtons.self) { button in
-                SettingView(isVibration: $isVibration, isBGMPlay: $isBGMPlay)
+                SettingView(navigationPath: $navigationPath, isVibration: $isVibration, isBGMPlay: $isBGMPlay)
             }
         }
         .onAppear {

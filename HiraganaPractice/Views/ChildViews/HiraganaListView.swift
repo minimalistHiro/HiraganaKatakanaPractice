@@ -60,21 +60,20 @@ struct HiraganaListView: View {
                 ForEach(list, id: \.self) { text in
                     NavigationLink(value: text) {
                         if !text.contains("空白") {
-                            ZStack {
-                                Rectangle()
-                                    .stroke(lineWidth: 3)
-                                    .frame(width: 50, height: 50)
-                                    .overlay {
-                                        Text(text)
-                                            .font(.mincho(ofSize: isDoubleText ? 25 : 40))
+                            Rectangle()
+                                .stroke(lineWidth: 3)
+                                .frame(width: 50, height: 50)
+                                .overlay {
+                                    FontView(text: text)
+//                                    Text(text)
+//                                        .font(.mincho(ofSize: isDoubleText ? 25 : 40))
+                                }
+                                .overlay {
+                                    if clearedText.contains(text) {
+                                        HanamaruView()
                                     }
-                                    .overlay {
-                                        if clearedText.contains(text) {
-                                            HanamaruView()
-                                        }
-                                    }
-                                    .background(clearedText.contains(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
-                            }
+                                }
+                                .background(clearedText.contains(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
                         }
                     }
                     .foregroundColor(.black)
@@ -100,20 +99,23 @@ struct HiraganaListView: View {
         } message: {
             Text("Congratulation! You've cleared everything. Go to the next level when you are ready.")
         }
+        // 戻るボタンを独自実装
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    navigationPath.removeLast()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .bold()
+                }
+                .padding()
+            }
+        }
     }
-    
-    /// 指定のテキストがクリアしたテキストとしてModelに保存されているかチェック。
-    /// - Parameters:
-    ///   - text: 検索するテキスト
-    /// - Returns:　指定のテキストがクリアしたテキストとして保存されていたらtrue、見つからなかった場合false。
-//    private func checkClearedText(_ text: String) -> Bool {
-//        for data in data {
-//            if data.clearedText == text {
-//                return true
-//            }
-//        }
-//        return false
-//    }
     
     /// クリアしたテキストの数を数える。また、クリアしたテキストがリストの数と一致（全てクリアした）場合、Modelにクリアしたレベルを保存する。
     /// - Parameters: なし
@@ -134,6 +136,7 @@ struct HiraganaListView: View {
                 isYellowMode = true
                 isHalfCleared = true
             } else if data.clearedLevel == selectedLevel {
+                isHalfCleared = true
                 isCleared = true
             }
         }

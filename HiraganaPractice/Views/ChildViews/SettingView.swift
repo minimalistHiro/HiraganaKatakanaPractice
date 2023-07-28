@@ -12,6 +12,7 @@ struct SettingView: View {
     @FetchRequest(sortDescriptors: [])
     var data: FetchedResults<Entity>
     
+    @Binding var navigationPath: NavigationPath
     @Binding var isVibration: Bool
     @Binding var isBGMPlay: Bool
     @State private var isShowDeleteAlert: Bool = false      // アラートの表示有無
@@ -68,6 +69,22 @@ struct SettingView: View {
             }
         } message: {
             Text("It has been deleted.")
+        }
+        // 戻るボタンを独自実装
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    navigationPath.removeLast()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .bold()
+                }
+                .padding()
+            }
         }
     }
     
@@ -136,6 +153,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(isVibration: .constant(true), isBGMPlay: .constant(true))
+        SettingView(navigationPath: .constant(NavigationPath()), isVibration: .constant(true), isBGMPlay: .constant(true))
     }
 }

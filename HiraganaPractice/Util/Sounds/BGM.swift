@@ -18,7 +18,7 @@ class BGM: NSObject, ObservableObject {
     func playSound() {
         do {
             player = try AVAudioPlayer(data: data)
-            player.volume = 0.2
+            player.volume = 0.1
             player.numberOfLoops = -1
             player.play()
         } catch {

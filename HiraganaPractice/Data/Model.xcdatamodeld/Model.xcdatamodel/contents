@@ -4,5 +4,7 @@
         <attribute name="clearedLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="clearedText" optional="YES" attributeType="String"/>
         <attribute name="halfClearedLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="halfClearedText" optional="YES" attributeType="String"/>
+        <attribute name="perfectClearedLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>

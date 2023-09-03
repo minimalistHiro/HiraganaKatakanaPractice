@@ -15,6 +15,8 @@ struct SettingView: View {
     @Binding var navigationPath: NavigationPath
     @Binding var isVibration: Bool
     @Binding var isBGMPlay: Bool
+    @Binding var isShowHanamaruGuidance: Bool
+    @Binding var isShowFirstHanamaru: Bool
     @State private var isShowDeleteAlert: Bool = false      // アラートの表示有無
     @State private var isShowAfterDeleteAlert: Bool = false// アラートの表示有無
 //    @State private var alertEntity = AlertEntity(title: "", message: "", actionText: "", cancelText: "", button: .single)
@@ -77,7 +79,7 @@ struct SettingView: View {
                 Button {
                     navigationPath.removeLast()
                 } label: {
-                    Image(systemName: "arrow.backward")
+                    Image(systemName: "chevron.left")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)
@@ -134,6 +136,9 @@ struct SettingView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func deleteData() {
+        isShowHanamaruGuidance = false
+        isShowFirstHanamaru = false
+        
         for data in data {
             viewContext.delete(data)
         }
@@ -153,6 +158,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(navigationPath: .constant(NavigationPath()), isVibration: .constant(true), isBGMPlay: .constant(true))
+        SettingView(navigationPath: .constant(NavigationPath()), isVibration: .constant(true), isBGMPlay: .constant(true), isShowHanamaruGuidance: .constant(false), isShowFirstHanamaru: .constant(false))
     }
 }

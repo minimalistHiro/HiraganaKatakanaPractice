@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD4F77FF2A91E3580036D27F /* HiraganaDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4F77FE2A91E3580036D27F /* HiraganaDrawPoints.swift */; };
+		FD7EE0F82AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0F72AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift */; };
+		FD7EE0FA2AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0F92AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift */; };
+		FD7EE0FC2AA447E6002817F0 /* MaruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0FB2AA447E6002817F0 /* MaruView.swift */; };
 		FD904C612A580DFD00B56F77 /* HiraganaPracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */; };
 		FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C622A580DFD00B56F77 /* ContentView.swift */; };
 		FD904C652A580DFF00B56F77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD904C642A580DFF00B56F77 /* Assets.xcassets */; };
@@ -14,7 +18,9 @@
 		FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C702A580EE400B56F77 /* CanvasView.swift */; };
 		FD904C732A580F3E00B56F77 /* DrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C722A580F3E00B56F77 /* DrawPoints.swift */; };
 		FD904C762A580F5A00B56F77 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C752A580F5A00B56F77 /* Setting.swift */; };
+		FD9A920C2AA0AD8000A4AE08 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9A920B2AA0AD7F00A4AE08 /* Buttons.swift */; };
 		FDAF93742A73910400C1C89C /* FontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF93732A73910400C1C89C /* FontView.swift */; };
+		FDC7511A2A9C4B7A00052BC4 /* KatakanaDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC751192A9C4B7A00052BC4 /* KatakanaDrawPoints.swift */; };
 		FDC7B3E02A5947F300E581D0 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3DF2A5947F300E581D0 /* Line.swift */; };
 		FDC7B3EA2A595ACF00E581D0 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3E92A595ACE00E581D0 /* FontExtension.swift */; };
 		FDC7B3EE2A595DC300E581D0 /* HiraganaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC7B3ED2A595DC300E581D0 /* HiraganaListView.swift */; };
@@ -42,6 +48,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD4F77FE2A91E3580036D27F /* HiraganaDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaDrawPoints.swift; sourceTree = "<group>"; };
+		FD7EE0F72AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaSonantDrawPoints.swift; sourceTree = "<group>"; };
+		FD7EE0F92AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaSonantDrawPoints.swift; sourceTree = "<group>"; };
+		FD7EE0FB2AA447E6002817F0 /* MaruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaruView.swift; sourceTree = "<group>"; };
 		FD904C5D2A580DFD00B56F77 /* HiraganaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiraganaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaPracticeApp.swift; sourceTree = "<group>"; };
 		FD904C622A580DFD00B56F77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,7 +60,9 @@
 		FD904C702A580EE400B56F77 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		FD904C722A580F3E00B56F77 /* DrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPoints.swift; sourceTree = "<group>"; };
 		FD904C752A580F5A00B56F77 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		FD9A920B2AA0AD7F00A4AE08 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		FDAF93732A73910400C1C89C /* FontView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontView.swift; sourceTree = "<group>"; };
+		FDC751192A9C4B7A00052BC4 /* KatakanaDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaDrawPoints.swift; sourceTree = "<group>"; };
 		FDC7B3DF2A5947F300E581D0 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		FDC7B3E72A595A3C00E581D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FDC7B3E92A595ACE00E581D0 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
@@ -98,6 +110,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD4F77FD2A91E3150036D27F /* ExampleDrawPoints */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F77FE2A91E3580036D27F /* HiraganaDrawPoints.swift */,
+				FD7EE0F72AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift */,
+				FDC751192A9C4B7A00052BC4 /* KatakanaDrawPoints.swift */,
+				FD7EE0F92AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift */,
+			);
+			path = ExampleDrawPoints;
+			sourceTree = "<group>";
+		};
 		FD904C542A580DFD00B56F77 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +187,7 @@
 		FD904C742A580F4700B56F77 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				FD4F77FD2A91E3150036D27F /* ExampleDrawPoints */,
 				FD904C722A580F3E00B56F77 /* DrawPoints.swift */,
 				FDF1908E2A61105B0030F5C6 /* Model.xcdatamodeld */,
 			);
@@ -204,8 +228,10 @@
 				FDC7B3F52A5C20B600E581D0 /* Arrow.swift */,
 				FDEF0A9F2A5E4D6000BEBB29 /* CurveArrow.swift */,
 				FDEF0AB22A6018B300BEBB29 /* LevelButtonView.swift */,
+				FD7EE0FB2AA447E6002817F0 /* MaruView.swift */,
 				FDF190912A61233A0030F5C6 /* HanamaruView.swift */,
 				FDAF93732A73910400C1C89C /* FontView.swift */,
+				FD9A920B2AA0AD7F00A4AE08 /* Buttons.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -317,6 +343,7 @@
 			files = (
 				FDEF0AA22A5E6A1800BEBB29 /* HiraganaDiphthongArrowView.swift in Sources */,
 				FDEF0AB12A5EF0B600BEBB29 /* Sounds.swift in Sources */,
+				FD7EE0FA2AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift in Sources */,
 				FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */,
 				FDF190922A61233A0030F5C6 /* HanamaruView.swift in Sources */,
 				FDEF0AAE2A5EDEC000BEBB29 /* KatakanaDiphthongSonantArrowView.swift in Sources */,
@@ -325,6 +352,7 @@
 				FDEF0AA02A5E4D6000BEBB29 /* CurveArrow.swift in Sources */,
 				FDEF0A9E2A5D803F00BEBB29 /* HiraganaSonantArrowView.swift in Sources */,
 				FDC7B3EE2A595DC300E581D0 /* HiraganaListView.swift in Sources */,
+				FD9A920C2AA0AD8000A4AE08 /* Buttons.swift in Sources */,
 				FD904C612A580DFD00B56F77 /* HiraganaPracticeApp.swift in Sources */,
 				FDC7B3F22A5A877700E581D0 /* LevelSelectView.swift in Sources */,
 				FDF190902A61105C0030F5C6 /* Model.xcdatamodeld in Sources */,
@@ -332,17 +360,21 @@
 				FDC7B3E02A5947F300E581D0 /* Line.swift in Sources */,
 				FD904C732A580F3E00B56F77 /* DrawPoints.swift in Sources */,
 				FDEF0AAC2A5EDA3300BEBB29 /* KatakanaDiphthongArrowView.swift in Sources */,
+				FD7EE0F82AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift in Sources */,
 				FDEF0AA82A5E880300BEBB29 /* KatakanaArrowView.swift in Sources */,
 				FDEF0AAA2A5EA9DB00BEBB29 /* KatakanaSonantArrowView.swift in Sources */,
 				FDAF93742A73910400C1C89C /* FontView.swift in Sources */,
 				FDC7B3F02A59652D00E581D0 /* PracticeView.swift in Sources */,
 				FDEF0AA42A5E6F9400BEBB29 /* DoubleTextPracticeView.swift in Sources */,
+				FDC7511A2A9C4B7A00052BC4 /* KatakanaDrawPoints.swift in Sources */,
 				FDF190942A6144C40030F5C6 /* SettingView.swift in Sources */,
 				FDEF0AB32A6018B300BEBB29 /* LevelButtonView.swift in Sources */,
 				FDD448D22A6420250077E42B /* BGM.swift in Sources */,
 				FD904C712A580EE400B56F77 /* CanvasView.swift in Sources */,
 				FDC7B3F82A5CFC4400E581D0 /* HiraganaArrowView.swift in Sources */,
+				FD4F77FF2A91E3580036D27F /* HiraganaDrawPoints.swift in Sources */,
 				FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */,
+				FD7EE0FC2AA447E6002817F0 /* MaruView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,3 +23,6 @@
 // MARK: - HiraganaListView
 "I'm finally halfway through. Practice the remaining yellow letters!" = "드디어 중간에 왔습니다. 나머지 노란색 글자를 연습하세요!";
 "Congratulation! You've cleared everything. Go to the next level when you are ready." = "축하합니다! 당신은 모든 것을 지웠다. 준비가 되면 다음 단계로 이동하십시오.";
+"Wonderful! Perfect! This level is perfect." = "아주 멋진! 완벽한! 이 수준은 완벽합니다.";
+"You did it! You were able to write it with a hidden example. If you hide the example and write it, you will receive an accent." = "훌륭해! 숨겨진 예제를 사용하여 작성할 수 있었습니다. 예문을 숨겨서 쓰면 악센트가 나옵니다.";
+"Once you get used to it, press the text button on the bottom left and try writing with the model hidden!" = "익숙해지면 왼쪽 하단의 텍스트 버튼을 누르고 모델을 숨긴 상태로 글쓰기를 해보세요!";

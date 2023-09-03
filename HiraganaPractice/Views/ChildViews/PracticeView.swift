@@ -13,15 +13,17 @@ struct PracticeView: View {
     @FetchRequest(sortDescriptors: [])
     var data: FetchedResults<Entity>
     
+    let textDrawPoints = HiraganaDrawPoints()
     let setting = Setting()
-    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var nextText: String
     @Binding var isVibration: Bool
+    @Binding var isShowArrow: Bool
+    @Binding var isShowText: Bool
     @State private var endedDrawPoints: [DrawPoints] = []       // ペンで描いた座標を格納
-    @State private var isShowArrow: Bool = true                 // 書き順矢印の表示有無
-    @State private var isShowText: Bool = true                  // テキストの表示有無
+    @State private var savedDrawPoints: [DrawPoints] = []       // 手本実行用に以前の座標を一時的に格納
+    @State private var isShowAnExample: Bool = false            // お手本の有無
     let text: String                                            // 取得したテキスト1文字
     var list: [String] {
         switch selectedLevel {
@@ -44,160 +46,66 @@ struct PracticeView: View {
             if selectedLevel <= 4 {
                 setting.hiraganaBackgroundColor
                     .ignoresSafeArea()
+                    .overlay {
+                        if isShowAnExample {
+                            Color(white: 0.7, opacity: 0.5)
+                                .ignoresSafeArea()
+                        }
+                    }
             } else {
                 setting.katakanaBackgroundColor
                     .ignoresSafeArea()
+                    .overlay {
+                        if isShowAnExample {
+                            Color(white: 0.7, opacity: 0.5)
+                                .ignoresSafeArea()
+                        }
+                    }
             }
             
             HStack {
                 Spacer()
-                
-                // 一つ前のひらがなへ
-                Button {
-                    if isVibration {
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                    }
-                    endedDrawPoints.removeAll()
-                    if let index = list.firstIndex(of: text) {
-                        navigationPath.removeLast()
-                        // 最初の文字"あ"の場合、"ん"を表示。そうでない場合、一つ前のひらがなを表示。
-                        if index == 0 {
-                            if let last = list.last {
-                                nextText = last
-                                navigationPath.append(nextText)
-                            }
-                        } else {
-                            nextText = list[index - 1]
-                            navigationPath.append(nextText)
-                        }
-                    }
-                } label: {
-                    Image(systemName: "arrowtriangle.backward.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: setting.canvasButtonSize)
-                        .foregroundColor(.black)
-                }
-                
+                PreviousTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample)
                 Spacer()
                 
-                // ボタン
                 VStack {
                     Spacer()
-                    
-                    // 発音再生ボタン
-                    Button {
-                        if isVibration {
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        }
-                        sounds.fileName = text
-                        sounds.playSound()
-                    } label: {
-                        Image(systemName: "waveform")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: setting.canvasButtonSize)
-                            .foregroundColor(.black)
-                    }
-                    
+                    SoundButton(text: text, isVibration: $isVibration)
                     Spacer()
-                    
-                    // 削除ボタン
-                    Button {
-                        if isVibration {
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        }
-                        endedDrawPoints.removeAll()
-                    } label: {
-                        Image(systemName: "trash")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: setting.canvasButtonSize)
-                            .foregroundColor(.black)
-                    }
-                    
+                    ExampleOperationButton(isVibration: $isVibration, endedDrawPoints: $endedDrawPoints, savedDrawPoints: $savedDrawPoints, isShowAnExample: $isShowAnExample)
                     Spacer()
-                    
-                    // 書き順矢印の表示有無ボタン
-                    Button {
-                        if isVibration {
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        }
-                        isShowArrow.toggle()
-                    } label: {
-                        Image(systemName: isShowArrow ?  "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: setting.canvasButtonSize)
-                            .foregroundColor(.black)
-                    }
-                    
+                    DeleteButton(isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, isShowAnExample: $isShowAnExample)
                     Spacer()
-                    
-                    // テキストの表示有無ボタン
-                    Button {
-                        if isVibration {
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        }
-                        isShowText.toggle()
-                    } label: {
-                        Circle()
-                            .scaledToFit()
-                            .frame(width: setting.canvasButtonSize * 1.3)
-                            .foregroundColor(isShowText ? .black : .white)
-                            .overlay {
-                                Text(text)
-                                    .font(.system(size: setting.textShowButtonSize))
-                                    .foregroundColor(isShowText ? .white : .black)
-                                    .bold()
-                            }
-                    }
-                    
+                    DisplayTextButton(text: text, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText)
                     Spacer()
                 }
-                
                 Spacer()
-                
                 // キャンバス
-                CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, text: text)
+                CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, text: text)
                     .frame(minWidth: setting.canvasMinSize,
                            maxWidth: setting.canvasMaxSize,
                            minHeight: setting.canvasMinSize,
                            maxHeight: setting.canvasMaxSize)
-                
                 Spacer()
-                
-                // 次のひらがなへ
-                Button {
-                    if isVibration {
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                    }
-                    endedDrawPoints.removeAll()
-                    if let index = list.firstIndex(of: text) {
-                        navigationPath.removeLast()
-                        // 最後の文字"ん"の場合、"あ"を表示。そうでない場合、次のひらがなを表示。
-                        if index == list.count - 1 {
-                            nextText = list[0]
-                            navigationPath.append(nextText)
-                        } else {
-                            nextText = list[index + 1]
-                            navigationPath.append(nextText)
-                        }
-                    }
-                } label: {
-                    Image(systemName: "arrowtriangle.right.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: setting.canvasButtonSize)
-                        .foregroundColor(.black)
-                }
-                
+                NextTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample)
                 Spacer()
             }
         }
         .onChange(of: endedDrawPoints) { points in
-            if points.count == 1 {
-                addClearedText()
+            // 升に記入、且つそれが手本実行時でない場合のみ実行。
+            if points.count == 1 && !isShowAnExample {
+                if isShowText {
+                    addHalfClearedText()
+                } else {
+                    addHalfClearedText()
+                    addClearedText()
+                }
+            }
+        }
+        .onChange(of: isShowAnExample) { _ in
+            // お手本が終了したら、一時的に保存していた以前の手書き座標を返却する。
+            if !isShowAnExample {
+                endedDrawPoints = savedDrawPoints
             }
         }
         // 戻るボタンを独自実装
@@ -207,7 +115,7 @@ struct PracticeView: View {
                 Button {
                     navigationPath.removeLast()
                 } label: {
-                    Image(systemName: "arrow.backward")
+                    Image(systemName: "chevron.left")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)
@@ -215,6 +123,26 @@ struct PracticeView: View {
                 }
                 .padding()
             }
+        }
+    }
+    
+    /// Modelにハーフクリアしたテキストを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func addHalfClearedText() {
+        // テキストがクリア済みの場合、returnする。
+        for data in data {
+            if data.halfClearedText == text {
+                return
+            }
+        }
+        
+        let newText = Entity(context: viewContext)
+        newText.halfClearedText = text
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
         }
     }
     
@@ -241,6 +169,6 @@ struct PracticeView: View {
 
 struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(6), nextText: .constant("あ"), isVibration: .constant(true), text: "デ")
+        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(6), nextText: .constant("あ"), isVibration: .constant(true), isShowArrow: .constant(true), isShowText: .constant(true), text: "ボ")
     }
 }

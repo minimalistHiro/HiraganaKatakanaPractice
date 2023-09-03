@@ -26,9 +26,11 @@ final class Setting {
     let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")       // ひらがな
     let katakanaBackgroundColor: Color = Color("KatakanaBackgroundColor")       // カタカナ
     let clearedTextBackgroundColor: Color = Color("ClearedTextBackgroundColor") // クリア後のテキスト
+    let halfClearedTextBackgroundColor: Color = Color("HalfClearedTextBackgroundColor") // ハーフクリア後のテキスト
     let yellowModeBackgroundColor: Color = Color("YellowModeBackgroundColor")   // イエローモードの背景色
     
     // 画像名
+    let maru: String = String("Maru")                       // 丸
     let hanamaru: String = String("Hanamaru")               // はなまる
     
     // サウンド名

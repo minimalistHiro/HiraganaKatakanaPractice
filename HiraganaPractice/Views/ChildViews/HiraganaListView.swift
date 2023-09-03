@@ -17,10 +17,17 @@ struct HiraganaListView: View {
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var isDoubleText: Bool
+    @Binding var isShowHanamaruGuidance: Bool
+    @Binding var isShowFirstHanamaru: Bool
     @State private var clearedText: [String] = []           // クリアしたテキスト
+    @State private var halfClearedText: [String] = []       // ハーフクリアしたテキスト
     @State private var clearedTextCount: Int = 0            // クリアしたテキスト数
+    @State private var halfClearedTextCount: Int = 0        // ハーフクリアしたテキスト数
     @State private var isShowYellowModeAlert: Bool = false  // イエローモードアラートの表示有無
-    @State private var isShowAllClearAlert: Bool = false    // 全クリアアラートの表示有無
+    @State private var isShowClearAlert: Bool = false       // 全ハーフクリアアラートの表示有無
+    @State private var isShowPerfectClearAlert: Bool = false// パーフェクトクリアアラートの表示有無
+    @State private var isShowHanamaruGuidanceAlert: Bool = false // はなまる紹介アラートの表示有無
+    @State private var isShowFirstHanamaruAlert: Bool = false// 初のはなまるアラートの表示有無
     @State private var isYellowMode: Bool = false           // イエローモードの発動有無。テキストの半分以上クリア = true、半分以下 = false。
     var list: [String] {
         switch selectedLevel {
@@ -65,15 +72,15 @@ struct HiraganaListView: View {
                                 .frame(width: 50, height: 50)
                                 .overlay {
                                     FontView(text: text)
-//                                    Text(text)
-//                                        .font(.mincho(ofSize: isDoubleText ? 25 : 40))
                                 }
                                 .overlay {
                                     if clearedText.contains(text) {
                                         HanamaruView()
+                                    } else if halfClearedText.contains(text) {
+                                        MaruView()
                                     }
                                 }
-                                .background(clearedText.contains(text) ? setting.clearedTextBackgroundColor : (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white)))
+                                .background(clearedText.contains(text) ? setting.clearedTextBackgroundColor : (halfClearedText.contains(text) ? setting.halfClearedTextBackgroundColor :  (isYellowMode ? setting.yellowModeBackgroundColor : Color(.white))))
                         }
                     }
                     .foregroundColor(.black)
@@ -82,6 +89,7 @@ struct HiraganaListView: View {
         }
         .onAppear {
             clearedTextCount = 0
+            halfClearedTextCount = 0
             countClearedText()
         }
         .alert("", isPresented: $isShowYellowModeAlert) {
@@ -92,12 +100,33 @@ struct HiraganaListView: View {
         } message: {
             Text("I'm finally halfway through. Practice the remaining yellow letters!")
         }
-        .alert("", isPresented: $isShowAllClearAlert) {
+        .alert("", isPresented: $isShowClearAlert) {
             Button("OK") {
-                isShowAllClearAlert = false
+                isShowClearAlert = false
             }
         } message: {
             Text("Congratulation! You've cleared everything. Go to the next level when you are ready.")
+        }
+        .alert("", isPresented: $isShowPerfectClearAlert) {
+            Button("OK") {
+                isShowPerfectClearAlert = false
+            }
+        } message: {
+            Text("Wonderful! Perfect! This level is perfect.")
+        }
+        .alert("", isPresented: $isShowFirstHanamaruAlert) {
+            Button("OK") {
+                isShowFirstHanamaruAlert = false
+            }
+        } message: {
+            Text("You did it! You were able to write it with a hidden example. If you hide the example and write it, you will receive an accent.")
+        }
+        .alert("", isPresented: $isShowHanamaruGuidanceAlert) {
+            Button("OK") {
+                isShowHanamaruGuidanceAlert = false
+            }
+        } message: {
+            Text("Once you get used to it, press the text button on the bottom left and try writing with the model hidden!")
         }
         // 戻るボタンを独自実装
         .navigationBarBackButtonHidden(true)
@@ -106,7 +135,7 @@ struct HiraganaListView: View {
                 Button {
                     navigationPath.removeLast()
                 } label: {
-                    Image(systemName: "arrow.backward")
+                    Image(systemName: "chevron.left")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)
@@ -121,42 +150,90 @@ struct HiraganaListView: View {
     /// - Parameters: なし
     /// - Returns: なし
     private func countClearedText() {
-        var isHalfCleared: Bool = false                 // 半分クリアしたか否か
+        var isPerfect: Bool = false                     // 全てはなまるか否か
         var isCleared: Bool = false                     // 全てクリアしたか否か
+        var isHalfCleared: Bool = false                 // 半分クリアしたか否か
         clearedText.removeAll()
+        halfClearedText.removeAll()
+        
         for data in data {
             if let text = data.clearedText {
                 // モデルに保存済みのテキストが選択したレベルのテキストに含まれていた場合、カウントを1加える。
                 if list.contains(text) {
                     clearedText.append(text)
                     clearedTextCount += 1
-//                    print("クリア:\(clearedTextCount)")
                 }
-            } else if data.halfClearedLevel == selectedLevel {
+            }
+            if let text = data.halfClearedText {
+                // モデルに保存済みのテキストが選択したレベルのテキストに含まれていた場合、カウントを1加える。
+                if list.contains(text) {
+                    halfClearedText.append(text)
+                    halfClearedTextCount += 1
+                }
+            }
+            
+            if data.halfClearedLevel == selectedLevel {
                 isYellowMode = true
                 isHalfCleared = true
             } else if data.clearedLevel == selectedLevel {
                 isHalfCleared = true
                 isCleared = true
+            } else if data.perfectClearedLevel == selectedLevel {
+                isHalfCleared = true
+                isCleared = true
+                isPerfect = true
             }
         }
         
         var blankRemovedList = list
         blankRemovedList.removeAll(where: {$0.contains("空白")})
-//        print("全テキスト:\(blankRemovedList.count)")
         
-        if blankRemovedList.count <= clearedTextCount && !isCleared {
-            // クリアしたテキスト数と、元のテキスト数が同じ（全てクリアした）且つそれが初回の場合、Modelにクリアしたレベルを保存する。
-            addClearedLebel()
-            isShowAllClearAlert = true
+        // 初めてはなまるを獲得したら、初はなまるアラートを発動する。
+        if clearedTextCount >= 1 && !isShowFirstHanamaru {
+            isShowFirstHanamaru = true
+            isShowHanamaruGuidance = true
+            isShowFirstHanamaruAlert = true
+        }
+        
+        // あるレベルでハーフクリアが7個以上になったら、はなまる紹介アラートを発動する。
+        if halfClearedTextCount >= 7 && !isShowHanamaruGuidance {
+            isShowHanamaruGuidance = true
+            isShowHanamaruGuidanceAlert = true
             sounds.fileName = setting.yellowModeAlertSound
             sounds.playSound()
-        } else if ((blankRemovedList.count / 2) <= clearedTextCount) && !isHalfCleared {
+        }
+        
+        if blankRemovedList.count <= clearedTextCount && !isPerfect {
+            // クリアしたテキスト数と、元のテキスト数が同じ（全てクリアした）且つそれが初回の場合、Modelにパーフェクトクリアしたレベルを保存する。
+            addPerfectClearedLebel()
+            isShowPerfectClearAlert = true
+            sounds.fileName = setting.yellowModeAlertSound
+            sounds.playSound()
+        } else if blankRemovedList.count <= halfClearedTextCount && !isCleared {
+            // ハーフクリアしたテキスト数と、元のテキスト数が同じ（全てハーフクリアした）且つそれが初回の場合、Modelにクリアしたレベルを保存する。
+            addClearedLebel()
+            isShowClearAlert = true
+            sounds.fileName = setting.yellowModeAlertSound
+            sounds.playSound()
+        } else if ((blankRemovedList.count / 2) <= halfClearedTextCount) && !isHalfCleared {
             // クリアしたテキスト数が、元のテキスト数の半分以上（半分クリアした）場合、イエローモード発動。
             addHalfClearedLebel()
             isShowYellowModeAlert = true
             sounds.fileName = setting.yellowModeAlertSound
             sounds.playSound()
+        }
+    }
+    
+    /// Modelにパーフェクトクリアしたレベルを保存する。
+    /// - Parameters: なし
+    /// - Returns: なし
+    private func addPerfectClearedLebel() {
+        let newLevel = Entity(context: viewContext)
+        newLevel.perfectClearedLevel = Int16(selectedLevel)
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("セーブに失敗")
         }
     }
     
@@ -189,6 +266,6 @@ struct HiraganaListView: View {
 
 struct HiraganaListView_Previews: PreviewProvider {
     static var previews: some View {
-        HiraganaListView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(1), isDoubleText: .constant(false))
+        HiraganaListView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(1), isDoubleText: .constant(false), isShowHanamaruGuidance: .constant(false), isShowFirstHanamaru: .constant(false))
     }
 }

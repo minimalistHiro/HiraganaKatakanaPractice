@@ -19,7 +19,19 @@ class Sounds: NSObject {
             player = try AVAudioPlayer(data: data)
             player.stop()
             player.currentTime = 0.0
-            player.volume = 1.0
+            player.play()
+        } catch {
+            print("音の再生に失敗しました。")
+        }
+    }
+    
+    func playLoopSound() {
+        data = NSDataAsset(name: "\(fileName)")?.data ?? Data()
+        do {
+            player = try AVAudioPlayer(data: data)
+            player.stop()
+            player.currentTime = 0.0
+            player.numberOfLoops = -1
             player.play()
         } catch {
             print("音の再生に失敗しました。")

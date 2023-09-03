@@ -18,6 +18,10 @@ struct ContentView: View {
     @ObservedObject var bgmViewModel = BGM.shared
     @AppStorage("isVibration") var isVibration: Bool = true     // バイブレーションの有無
     @AppStorage("isBGMPlay") var isBGMPlay: Bool = true         // BGMの有無
+    @AppStorage("isShowArrow") var isShowArrow: Bool = true     // 書き順矢印の表示有無
+    @AppStorage("isShowText") var isShowText: Bool = true       // テキストの表示有無
+    @AppStorage("isShowHanamaruGuidance") var isShowHanamaruGuidance: Bool = false  // はなまる紹介をしたか否か。各データ一度きりのみ表示。
+    @AppStorage("isShowFirstHanamaru") var isShowFirstHanamaru: Bool = false  // 初のはなまるか否か。各データ一度きりのみ表示。
     @State private var endedDrawPoints: [DrawPoints] = []
     @State private var navigationPath = NavigationPath()
     @State private var selectedLevel: Int = 0           // 選択されたレベル
@@ -29,12 +33,12 @@ struct ContentView: View {
         NavigationStack(path: $navigationPath) {
             LevelSelectView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, isDoubleText: $isDoubleText)
             .navigationDestination(for: Int.self) { index in
-                HiraganaListView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, isDoubleText: $isDoubleText)
+                HiraganaListView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, isDoubleText: $isDoubleText, isShowHanamaruGuidance: $isShowHanamaruGuidance, isShowFirstHanamaru: $isShowFirstHanamaru)
             }
             .navigationDestination(for: String.self) { hiragana in
                 // ひらがなが一文字の場合と、一文字以上でViewを分ける。
                 if isDoubleText {
-                    DoubleTextPracticeView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, nextText: $nextDoubleText, isVibration: $isVibration, text: hiragana)
+                    DoubleTextPracticeView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, nextText: $nextDoubleText, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText, text: hiragana)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 sounds.fileName = hiragana
@@ -48,7 +52,7 @@ struct ContentView: View {
                             }
                         }
                 } else {
-                    PracticeView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, nextText: $nextText, isVibration: $isVibration, text: hiragana)
+                    PracticeView(navigationPath: $navigationPath, selectedLevel: $selectedLevel, nextText: $nextText, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText, text: hiragana)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 sounds.fileName = hiragana
@@ -64,7 +68,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(for: TappedButtons.self) { button in
-                SettingView(navigationPath: $navigationPath, isVibration: $isVibration, isBGMPlay: $isBGMPlay)
+                SettingView(navigationPath: $navigationPath, isVibration: $isVibration, isBGMPlay: $isBGMPlay, isShowHanamaruGuidance: $isShowHanamaruGuidance, isShowFirstHanamaru: $isShowFirstHanamaru)
             }
         }
         .onAppear {

@@ -11,6 +11,7 @@
 		FD7EE0F82AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0F72AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift */; };
 		FD7EE0FA2AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0F92AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift */; };
 		FD7EE0FC2AA447E6002817F0 /* MaruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0FB2AA447E6002817F0 /* MaruView.swift */; };
+		FD7EE0FF2AA4A422002817F0 /* AnswerPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7EE0FE2AA4A422002817F0 /* AnswerPoints.swift */; };
 		FD904C612A580DFD00B56F77 /* HiraganaPracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */; };
 		FD904C632A580DFD00B56F77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD904C622A580DFD00B56F77 /* ContentView.swift */; };
 		FD904C652A580DFF00B56F77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD904C642A580DFF00B56F77 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		FD7EE0F72AA1DE6E002817F0 /* HiraganaSonantDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaSonantDrawPoints.swift; sourceTree = "<group>"; };
 		FD7EE0F92AA32AC0002817F0 /* KatakanaSonantDrawPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KatakanaSonantDrawPoints.swift; sourceTree = "<group>"; };
 		FD7EE0FB2AA447E6002817F0 /* MaruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaruView.swift; sourceTree = "<group>"; };
+		FD7EE0FE2AA4A422002817F0 /* AnswerPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerPoints.swift; sourceTree = "<group>"; };
 		FD904C5D2A580DFD00B56F77 /* HiraganaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiraganaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD904C602A580DFD00B56F77 /* HiraganaPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiraganaPracticeApp.swift; sourceTree = "<group>"; };
 		FD904C622A580DFD00B56F77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 			path = ExampleDrawPoints;
 			sourceTree = "<group>";
 		};
+		FD7EE0FD2AA4A3E7002817F0 /* TextPoints */ = {
+			isa = PBXGroup;
+			children = (
+				FD7EE0FE2AA4A422002817F0 /* AnswerPoints.swift */,
+			);
+			path = TextPoints;
+			sourceTree = "<group>";
+		};
 		FD904C542A580DFD00B56F77 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				FD4F77FD2A91E3150036D27F /* ExampleDrawPoints */,
+				FD7EE0FD2AA4A3E7002817F0 /* TextPoints */,
 				FD904C722A580F3E00B56F77 /* DrawPoints.swift */,
 				FDF1908E2A61105B0030F5C6 /* Model.xcdatamodeld */,
 			);
@@ -375,6 +386,7 @@
 				FD4F77FF2A91E3580036D27F /* HiraganaDrawPoints.swift in Sources */,
 				FDEF0AA62A5E80F800BEBB29 /* HiraganaDiphthongSonantArrowView.swift in Sources */,
 				FD7EE0FC2AA447E6002817F0 /* MaruView.swift in Sources */,
+				FD7EE0FF2AA4A422002817F0 /* AnswerPoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,17 +13,26 @@ struct CanvasView: View {
     var data: FetchedResults<Entity>
     
     let setting = Setting()
+    
     let hiraganaDrawPoints = HiraganaDrawPoints()
     let hiraganaSonantDrawPoints = HiraganaSonantDrawPoints()
     let katakanaDrawPoints = KatakanaDrawPoints()
     let katakanaSonantDrawPoints = KatakanaSonantDrawPoints()
+    
+    let answerPoints = AnswerPoints()
+    
     @Binding var selectedLevel: Int
     @Binding var endedDrawPoints: [DrawPoints]
     @Binding var isShowArrow: Bool
     @Binding var isShowText: Bool
     @Binding var isShowAnExample: Bool
+    @Binding var isCheckStart: Bool
+    @Binding var isOnceShowText: Bool
+    @Binding var isCorrect: Bool
+    @Binding var isAllClear: Bool
     // onChangedイベント中の座標を保持
     @State private var tmpDrawPoints: DrawPoints = DrawPoints(points: [])
+//    @State private var answerPoints: [CGPoint] = []
     @State private var canvasLocalRect: CGRect = .zero              // canvasのサイズ情報
     static var canvasGetSize: CGFloat = .zero                       // canvasの取得サイズ
     @State private var isGetCanvasSize: Bool = false                // canvasサイズを取得したか否か
@@ -69,7 +78,6 @@ struct CanvasView: View {
                 ForEach(endedDrawPoints) { data in
                     Path { path in
                         path.addLines(data.points)
-                        print(endedDrawPoints)
                     }
                     .stroke(isShowAnExample ? .red : .black, style: StrokeStyle(lineWidth: isCheckSmallText() ? setting.smallTextCanvasLineWidth : setting.largeTextCanvasLineWidth, lineCap: .round, lineJoin: .round))
                 }
@@ -117,6 +125,19 @@ struct CanvasView: View {
                         }
                     }
                 }
+                
+                // 丸、又は、はなまる
+                if isAllClear {
+                    if isShowText || isOnceShowText {
+                        Image(setting.maru)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Image(setting.hanamaru)
+                            .resizable()
+                            .scaledToFit()
+                    }
+                }
             }
             .background() {
                 // backgroundを用いて動的にCanvasViewのサイズ（横幅長さ）を取得。
@@ -133,8 +154,8 @@ struct CanvasView: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged({ value in
-                        // お手本を実行していない場合のみ、手書きを許可。
-                        if !isShowAnExample {
+                        // お手本を実行していない場合、且つ正誤判定以外の場合のみ、手書きを許可。
+                        if !isShowAnExample && !isAllClear {
                             // 描いている途中（DrawPoints.pointsが空だったら）現在座標を加える
                             guard !tmpDrawPoints.points.isEmpty else {
                                 tmpDrawPoints.points.append(value.location)
@@ -149,8 +170,8 @@ struct CanvasView: View {
                         }
                     })
                     .onEnded({ value in
-                        // お手本を実行していない場合のみ、手書きを許可。
-                        if !isShowAnExample {
+                        // お手本を実行していない場合、且つ正誤判定以外の場合のみ、手書きを許可。
+                        if !isShowAnExample && !isAllClear {
                             endedDrawPoints.append(tmpDrawPoints)
                             tmpDrawPoints = DrawPoints(points: [])
                         }
@@ -171,6 +192,11 @@ struct CanvasView: View {
                 default:
                     break
                 }
+            }
+        }
+        .onChange(of: isCheckStart) { value in
+            if isCheckStart {
+                isCorrect = checkCorrectOrIncorrect(answerPoints.makePoints(text))
             }
         }
     }
@@ -214,6 +240,67 @@ struct CanvasView: View {
     /// - Returns: リサイズ後のテキストサイズ
     private func resizeTextSize(_ textSize: CGFloat) -> CGFloat {
         return textSize * (CanvasView.canvasGetSize / setting.canvasMaxSize)
+    }
+    
+    /// 書かれた文字の合否を判定する。
+    /// - Parameters:
+    ///   - textPoints: 正解座標
+    /// - Returns: なし
+    private func checkCorrectOrIncorrect(_ textPoints: [CGPoint]) -> Bool {
+        var passedPoints: [CGPoint] = []            // 誤差を含めた正解座標
+        var countX: Double = setting.errorLange     // x座標の誤差
+        var countY: Double = setting.errorLange     // y座標の誤差
+        
+        // テキスト正解座標に誤差を含めた座標を加える。
+        for point in textPoints {
+            while countY <= Double(abs(Int32(setting.errorLange))) {
+                let y = point.y + countY
+                while countX <= Double(abs(Int32(setting.errorLange))) {
+                    let x = point.x + countX
+                    passedPoints.append(CGPoint(x: x, y: y))
+                    countX += 0.5
+                }
+                countX = setting.errorLange
+                countY += 0.5
+            }
+            countY = setting.errorLange
+        }
+        
+        var magnification: Double {
+            return CanvasView.canvasGetSize / setting.canvasMaxSize
+        }                                       // 倍率
+        
+        var correctedPassedPoints: [CGPoint] = []       // 倍率補正後の誤差を含めた正解座標
+        // 誤差を含めた正解座標をキャンバスサイズに合わせて補正する。
+        for passedPoint in passedPoints {
+            var point: CGPoint = CGPoint(x: 0, y: 0)
+            point.x = CGFloat(round(passedPoint.x * magnification))
+            point.y = CGFloat(round(passedPoint.y * magnification))
+            correctedPassedPoints.append(point)
+        }
+        
+        var passedCount: Int = 0                // 正解座標の数をカウント
+        
+        // 記入した座標のうち、誤差を含む正解座標がいくつ含まれているかカウントする。
+        for points in endedDrawPoints {
+            for point in points.points {
+                var roundedPoint: CGPoint = CGPoint(x: 0, y: 0)
+                roundedPoint.x = CGFloat(round(point.x))
+                roundedPoint.y = CGFloat(round(point.y))
+                
+                // 誤差を含む正解座標に記入した座標が含まれていたら、カウンターに1加える。
+                if correctedPassedPoints.contains(roundedPoint) {
+                    passedCount += 1
+                }
+            }
+        }
+        
+        isCheckStart = false
+        // 見事正解した座標の個数が、正解座標の40%以上であった場合、正解とする
+        if Int(round(Double(textPoints.count) * 0.4)) <= passedCount {
+            return true
+        }
+        return false
     }
     
     /// 1画分の書き方のお手本の実行。
@@ -1827,6 +1914,6 @@ struct CanvasView: View {
 
 struct CanvasView_Previews: PreviewProvider {
     static var previews: some View {
-        CanvasView(selectedLevel: .constant(1), endedDrawPoints: .constant([]), isShowArrow: .constant(true), isShowText: .constant(true), isShowAnExample: .constant(true), text: "あ")
+        CanvasView(selectedLevel: .constant(1), endedDrawPoints: .constant([]), isShowArrow: .constant(true), isShowText: .constant(true), isShowAnExample: .constant(false), isCheckStart: .constant(false), isOnceShowText: .constant(false), isCorrect: .constant(false), isAllClear: .constant(false), text: "あ")
     }
 }

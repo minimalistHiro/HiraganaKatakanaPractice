@@ -9,6 +9,9 @@ import SwiftUI
 
 // 各種設定
 final class Setting {
+    // 各種設定
+    let errorLange: CGFloat = -3                            // 合否判定用テキスト座標の有効誤差
+    
     // Viewのサイズ
     let canvasMaxSize: CGFloat = 300                        // Canvasの最大サイズ
     let canvasMinSize: CGFloat = 150                        // Canvasの最小サイズ
@@ -20,7 +23,6 @@ final class Setting {
     let largeTextCanvasLineWidth: CGFloat = 15              // 大きい文字の線の太さ
     let smallTextCanvasLineWidth: CGFloat = 10              // 小さい文字の線の太さ
     
-    // カラー
     // 背景色
     let topViewBackgroundColor: Color = Color("TopViewBackgroundColor")         // トップ画面
     let hiraganaBackgroundColor: Color = Color("HiraganaBackgroundColor")       // ひらがな
@@ -36,6 +38,9 @@ final class Setting {
     // サウンド名
     let yellowModeAlertSound: String = String("Success")    // イエローモード発動のアラート音
     let eraserSound: String = String("Cancel")              // 消しゴム音
+    let maruSound: String = String("Correct")               // 正解音
+    let batsuSound: String = String("Incorrect")            // 不正解音
+    let hanamaruSound: String = String("Perfect")           // はなまる音
     
     // ひらがな50音
     let hiraganaList: [String] = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]

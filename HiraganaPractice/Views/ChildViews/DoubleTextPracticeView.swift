@@ -14,6 +14,7 @@ struct DoubleTextPracticeView: View {
     var data: FetchedResults<Entity>
     
     let setting = Setting()
+    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var nextText: String
@@ -25,6 +26,12 @@ struct DoubleTextPracticeView: View {
     @State private var isShowAnExample: Bool = false                // お手本の有無
     @State private var textDrawCount: Int = 0                       // 2升のうち、何升記入済みかカウント
     @State private var textNotShowDrawCount: Int = 0                // 2升のうち、何升お手本なしで記入済みかカウント
+    @State private var isCheckStart1: Bool = false                  // 正解チェックスタート有無1
+    @State private var isCheckStart2: Bool = false                  // 正解チェックスタート有無2
+    @State private var isOnceShowText: Bool = false                 // 一度でもお手本を閲覧したか否か
+    @State private var isCorrect1: Bool = false                     // 一文字の正解判定後の結果1
+    @State private var isCorrect2: Bool = false                     // 一文字の正解判定後の結果2
+    @State private var isAllClear: Bool = false                     // 全体の正解判定後の結果
     static var canvasGetSize: CGFloat = .zero                       // canvasの取得サイズ
     let text: String                                                // 取得したテキスト2文字
     var list: [String] {
@@ -70,27 +77,29 @@ struct DoubleTextPracticeView: View {
                 
                 HStack {
                     Spacer()
-                    SoundButton(text: text, isVibration: $isVibration)
+                    SoundButton(text: text, isVibration: $isVibration, isAllClear: $isAllClear)
                     Spacer()
-                    DeleteButton(isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, isShowAnExample: $isShowAnExample)
+                    DeleteButton(isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                     Spacer()
-                    DisplayTextButton(text: text, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText)
+                    DisplayTextButton(text: text, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, isAllClear: $isAllClear)
+                    Spacer()
+                    CheckStartButton(isVibration: $isVibration, isShowAnExample: $isShowAnExample, isCheckStart1: $isCheckStart1, isCheckStart2: $isCheckStart2, isAllClear: $isAllClear)
                     Spacer()
                 }
                 
                 HStack {
                     Spacer()
-                    PreviousTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, nextText: $nextText, isShowAnExample: $isShowAnExample)
+                    PreviousTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, nextText: $nextText, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                     Spacer()
                     // キャンバス1
-                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints1, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, text: String(text.prefix(1)))
+                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints1, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, isCheckStart: $isCheckStart1, isOnceShowText: $isOnceShowText, isCorrect: $isCorrect1, isAllClear: $isAllClear, text: String(text.prefix(1)))
                         .frame(minWidth: setting.canvasMinSize,
                                maxWidth: setting.canvasMaxSize,
                                minHeight: setting.canvasMinSize,
                                maxHeight: setting.canvasMaxSize)
                         .scaledToFit()
                     // キャンバス2
-                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints2, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, text: String(text.suffix(1)))
+                    CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints2, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, isCheckStart: $isCheckStart2, isOnceShowText: $isOnceShowText, isCorrect: $isCorrect2, isAllClear: $isAllClear, text: String(text.suffix(1)))
                         .frame(minWidth: setting.canvasMinSize,
                                maxWidth: setting.canvasMaxSize,
                                minHeight: setting.canvasMinSize,
@@ -98,17 +107,17 @@ struct DoubleTextPracticeView: View {
                         .scaledToFit()
                     
                     Spacer()
-                    NextTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, nextText: $nextText, isShowAnExample: $isShowAnExample)
+                    NextTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints1, endedDrawPoints2: $endedDrawPoints2, nextText: $nextText, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                     Spacer()
                 }
                 Spacer()
             }
         }
-        .onChange(of: endedDrawPoints1) { points in
-            drawingAction(points)
+        .onChange(of: isCorrect1) { isCorrect in
+            saveCorrectData(isCorrect)
         }
-        .onChange(of: endedDrawPoints2) { points in
-            drawingAction(points)
+        .onChange(of: isCorrect2) { isCorrect in
+            saveCorrectData(isCorrect)
         }
         // 戻るボタンを独自実装
         .navigationBarBackButtonHidden(true)
@@ -128,31 +137,41 @@ struct DoubleTextPracticeView: View {
         }
     }
     
-    /// ペンで描いた際にModelにクリアしたか否かの情報を保存する処理。
+    /// Modelにクリアしたか否かの情報を保存する処理。
     /// - Parameters:
-    ///   - points: 参照する座標データ
+    ///   - isCorrect: 参照する座標データ
     /// - Returns: なし
-    private func drawingAction(_ points: [DrawPoints]) {
-        if points.count == 1 {
+    private func saveCorrectData(_ isCorrect: Bool) {
+        if isCorrect {
             textDrawCount += 1
-            // お手本なしで書いた場合、専用変数に1加える。
-            if !isShowText {
+            // お手本なしで書いた場合、変数に1加える。
+            if !isOnceShowText && !isShowText {
                 textNotShowDrawCount += 1
             }
         }
         
-        // 2升とも記入済みの場合、Modelにクリアしたテキストを保存する。
+        // 2升とも記入済みの場合、ModelにYクリアしたテキストを保存する。
         if textDrawCount == 2 {
+            isAllClear = true
             // 2升ともお手本なしで書いた場合、クリア。それ以外の場合、ハーフクリア。
             if textNotShowDrawCount == 2 {
                 addHalfClearedText()
                 addClearedText()
+                sounds.fileName = setting.hanamaruSound
+                sounds.playSound()
             } else {
                 addHalfClearedText()
+                sounds.fileName = setting.maruSound
+                sounds.playSound()
             }
             // 再度テキストをModelに保存しないように、何升記入済みかのカウントを初期化する。
             textDrawCount = 0
             textNotShowDrawCount = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                isAllClear = false
+                isCorrect1 = false
+                isCorrect2 = false
+            }
         }
     }
     
@@ -199,6 +218,6 @@ struct DoubleTextPracticeView: View {
 
 struct DoubleTextPracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(7), nextText: .constant("きゃ"), isVibration: .constant(true), isShowArrow: .constant(true), isShowText: .constant(true), text: "きゃ")
+        DoubleTextPracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(3), nextText: .constant("きゃ"), isVibration: .constant(true), isShowArrow: .constant(true), isShowText: .constant(true), text: "きゃ")
     }
 }

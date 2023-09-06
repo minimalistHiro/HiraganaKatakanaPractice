@@ -13,8 +13,8 @@ struct PracticeView: View {
     @FetchRequest(sortDescriptors: [])
     var data: FetchedResults<Entity>
     
-    let textDrawPoints = HiraganaDrawPoints()
     let setting = Setting()
+    let sounds = Sounds()
     @Binding var navigationPath: NavigationPath
     @Binding var selectedLevel: Int
     @Binding var nextText: String
@@ -24,6 +24,10 @@ struct PracticeView: View {
     @State private var endedDrawPoints: [DrawPoints] = []       // ペンで描いた座標を格納
     @State private var savedDrawPoints: [DrawPoints] = []       // 手本実行用に以前の座標を一時的に格納
     @State private var isShowAnExample: Bool = false            // お手本の有無
+    @State private var isCheckStart: Bool = false               // 正解チェックスタート有無
+    @State private var isOnceShowText: Bool = false             // 一度でもお手本を閲覧したか否か
+    @State private var isCorrect: Bool = false                  // 一文字の正解判定後の結果
+    @State private var isAllClear: Bool = false                 // 全体の正解判定後の結果
     let text: String                                            // 取得したテキスト1文字
     var list: [String] {
         switch selectedLevel {
@@ -65,40 +69,57 @@ struct PracticeView: View {
             
             HStack {
                 Spacer()
-                PreviousTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample)
+                PreviousTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                 Spacer()
                 
                 VStack {
                     Spacer()
-                    SoundButton(text: text, isVibration: $isVibration)
+                    SoundButton(text: text, isVibration: $isVibration, isAllClear: $isAllClear)
                     Spacer()
-                    ExampleOperationButton(isVibration: $isVibration, endedDrawPoints: $endedDrawPoints, savedDrawPoints: $savedDrawPoints, isShowAnExample: $isShowAnExample)
+                    ExampleOperationButton(isVibration: $isVibration, endedDrawPoints: $endedDrawPoints, savedDrawPoints: $savedDrawPoints, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                     Spacer()
-                    DeleteButton(isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, isShowAnExample: $isShowAnExample)
+                    DeleteButton(isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
                     Spacer()
-                    DisplayTextButton(text: text, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText)
+                    DisplayTextButton(text: text, isVibration: $isVibration, isShowArrow: $isShowArrow, isShowText: $isShowText, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, isAllClear: $isAllClear)
                     Spacer()
                 }
                 Spacer()
                 // キャンバス
-                CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, text: text)
+                CanvasView(selectedLevel: $selectedLevel, endedDrawPoints: $endedDrawPoints, isShowArrow: $isShowArrow, isShowText: $isShowText, isShowAnExample: $isShowAnExample, isCheckStart: $isCheckStart, isOnceShowText: $isOnceShowText, isCorrect: $isCorrect, isAllClear: $isAllClear, text: text)
                     .frame(minWidth: setting.canvasMinSize,
                            maxWidth: setting.canvasMaxSize,
                            minHeight: setting.canvasMinSize,
                            maxHeight: setting.canvasMaxSize)
                 Spacer()
-                NextTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample)
+                VStack {
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    NextTextButton(text: text, list: list, navigationPath: $navigationPath, isVibration: $isVibration, isOnceShowText: $isOnceShowText, endedDrawPoints1: $endedDrawPoints, endedDrawPoints2: $endedDrawPoints, nextText: $nextText, isShowAnExample: $isShowAnExample, isAllClear: $isAllClear)
+                    Spacer()
+                    CheckStartButton(isVibration: $isVibration, isShowAnExample: $isShowAnExample, isCheckStart1: $isCheckStart, isCheckStart2: $isCheckStart, isAllClear: $isAllClear)
+                    Spacer()
+                }
                 Spacer()
             }
         }
-        .onChange(of: endedDrawPoints) { points in
-            // 升に記入、且つそれが手本実行時でない場合のみ実行。
-            if points.count == 1 && !isShowAnExample {
-                if isShowText {
+        .onChange(of: isCorrect) { _ in
+            // 正解判定実行
+            if isCorrect {
+                isAllClear = true
+                if isOnceShowText || isShowText {
                     addHalfClearedText()
+                    sounds.fileName = setting.maruSound
+                    sounds.playSound()
                 } else {
                     addHalfClearedText()
                     addClearedText()
+                    sounds.fileName = setting.hanamaruSound
+                    sounds.playSound()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    isAllClear = false
+                    isCorrect = false
                 }
             }
         }
@@ -169,6 +190,6 @@ struct PracticeView: View {
 
 struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(6), nextText: .constant("あ"), isVibration: .constant(true), isShowArrow: .constant(true), isShowText: .constant(true), text: "ボ")
+        PracticeView(navigationPath: .constant(NavigationPath()), selectedLevel: .constant(1), nextText: .constant("あ"), isVibration: .constant(true), isShowArrow: .constant(true), isShowText: .constant(true), text: "あ")
     }
 }
